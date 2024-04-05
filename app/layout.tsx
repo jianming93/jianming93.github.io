@@ -12,6 +12,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu"
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
 import { Linkedin } from "lucide-react";
 import { Icons } from "@/components/ui/icons";
 import { ModeToggle } from "@/components/ui/mode-toggle";
@@ -31,7 +32,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-
       <body className={inter.className}>
         <ThemeProvider
           attribute="class"
@@ -74,9 +74,43 @@ export default function RootLayout({
                 </NavigationMenuList>
               </NavigationMenu>
               <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-                <NavigationMenu id="nav-menu-utilities">
-                  <NavigationMenuList id="nav-menu-list-utilities">
-                    <ModeToggle />
+                <NavigationMenu id="nav-menu-misc">
+                  <NavigationMenuList id="nav-menu-list-misc">
+                    <NavigationMenuItem>
+                      <a
+                        href="http://www.linkedin.com/in/ngjianming"
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                      >
+                        <Button
+                          className="rounded"
+                          variant="ghost"
+                          size="icon"
+                          type="button"
+                        >
+                          <Linkedin className="h-[1.2rem] w-[1.2rem]"/>
+                        </Button>
+                      </a>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <a
+                        href="https://github.com/jianming93/"
+                        target={"_blank"}
+                        rel={"noreferrer"}
+                      >
+                        <Button
+                          className="rounded"
+                          variant="ghost"
+                          size="icon"
+                          type="button"
+                        >
+                          <Icons.gitHub className="h-[1.2rem] w-[1.2rem]"/>
+                        </Button>
+                      </a>
+                    </NavigationMenuItem>
+                    <NavigationMenuItem>
+                      <ModeToggle />
+                    </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
               </div>
@@ -85,26 +119,6 @@ export default function RootLayout({
           <>
             {children}
           </>
-          <footer>
-            <div className="py-6 px-32 flex flex-row justify-end border-t-2 w-[100%] absolute bottom-0">
-              <Button
-                className="mx-2"
-                variant="ghost"
-                size="icon"
-                type="button"
-              >
-                <Linkedin />
-              </Button>
-              <Button
-                className="mx-2"
-                variant="ghost"
-                size="icon"
-                type="button"
-              >
-                <Icons.gitHub />
-              </Button>
-            </div>
-          </footer>
         </ThemeProvider>
       </body>
     </html>
