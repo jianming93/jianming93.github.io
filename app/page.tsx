@@ -1,5 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
 import { HeroHighlight, Highlight } from "@/components/ui/hero-highlight";
 
 export default function Home() {
