@@ -39,15 +39,20 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div id="root-nav-bar-container" className="border-b">
+          <div id="root-nav-bar-container" className="border-b fixed top-0 z-50 w-full bg-inherit">
             <div id="root-nav-bar" className="flex h-16 items-center px-4">
               <NavigationMenu id="nav-menu-links">
                 <NavigationMenuList id="nav-menu-list-links">
                   <NavigationMenuItem>
                     <Link href="/" legacyBehavior passHref>
-                      <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                        Home
-                      </NavigationMenuLink>
+                        <Button
+                          className="rounded"
+                          variant="ghost"
+                          size="icon"
+                          type="button"
+                        >
+                          <Icons.home className="h-[1.2rem] w-[1.2rem]"/>
+                        </Button>
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
@@ -65,9 +70,9 @@ export default function RootLayout({
                     </Link>
                   </NavigationMenuItem>
                   <NavigationMenuItem>
-                    <Link href="/research" legacyBehavior passHref>
+                    <Link href="/blogs" legacyBehavior passHref>
                       <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
-                        Research
+                        Blogs
                       </NavigationMenuLink>
                     </Link>
                   </NavigationMenuItem>
@@ -77,7 +82,7 @@ export default function RootLayout({
                 <NavigationMenu id="nav-menu-misc">
                   <NavigationMenuList id="nav-menu-list-misc">
                     <NavigationMenuItem>
-                      <a
+                      <Link
                         href="http://www.linkedin.com/in/ngjianming"
                         target={"_blank"}
                         rel={"noreferrer"}
@@ -90,10 +95,10 @@ export default function RootLayout({
                         >
                           <Linkedin className="h-[1.2rem] w-[1.2rem]"/>
                         </Button>
-                      </a>
+                      </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <a
+                      <Link
                         href="https://github.com/jianming93/"
                         target={"_blank"}
                         rel={"noreferrer"}
@@ -106,7 +111,7 @@ export default function RootLayout({
                         >
                           <Icons.gitHub className="h-[1.2rem] w-[1.2rem]"/>
                         </Button>
-                      </a>
+                      </Link>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
                       <ModeToggle />

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 
-export default function RDAIInProductionPage() {
+export default function TritonFlowPage() {
     return (
         <div className="container mt-16 py-8">
             <Breadcrumb className="mb-8">
@@ -22,15 +22,15 @@ export default function RDAIInProductionPage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Red Dragon AI In Production</BreadcrumbPage>
+                        <BreadcrumbPage>TritonFlow</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
-                Red Dragon AI In Production
+                TritonFlow
             </h1>
             <a
-                href="https://github.com/jianming93/rdai-ai-in-prod"
+                href="https://github.com/jianming93/tritonflow"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" text-sm text-primary dark:text-primary/[60.3%]"

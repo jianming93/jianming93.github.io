@@ -12,10 +12,10 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 const cards = [
     {
-        title: "TritonFlow",
+        title: "Incremental Learner",
         description:
-            "MLOps open-source platform with Triton Inference Server as a core.",
-        link: "/projects/tritonflow",
+            "Capstone project with a combination of research + converting it to an actual application.",
+        link: "/projects/incremental-learner",
     },
     {
         title: "Red Dragon AI In Production",
@@ -24,20 +24,14 @@ const cards = [
         link: "/projects/rdai-in-production",
     },
     {
-        title: "Incremental Learner",
+        title: "TritonFlow",
         description:
-            "Capstone project with a combination of research + converting it to an actual application.",
-        link: "/projects/incremental-learner",
-    },
-    {
-        title: "Query Me",
-        description:
-            "A simple app leveraging GPT-3 to help non-technical users to query from CSV files with free text.",
-        link: "/projects/query-me",
+            "MLOps open-source platform with Triton Inference Server as a core.",
+        link: "/projects/tritonflow",
     },
 ]
 
-export default function ProjectsPage() {
+export default function BlogsPage() {
     return (
         <div className="container mt-16 py-8">
             <Breadcrumb className="mb-8">
@@ -47,12 +41,12 @@ export default function ProjectsPage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Projects</BreadcrumbPage>
+                        <BreadcrumbPage>Blogs</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                Projects
+                Blogs
             </h1>
             <HoverEffect items={cards}/>
         </div>
