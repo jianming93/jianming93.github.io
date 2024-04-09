@@ -135,20 +135,20 @@ export default function ResumePage() {
                     complexities from developers.
                 </li>
                 <li>
-                    Improved company's product development velocity by developing a ML inference platform on OpenShift
+                    Improved company&apos;s product development velocity by developing a ML inference platform on OpenShift
                     with Python, Arrow, Redis as the backend and React with Typescript as the frontend.
                 </li>
                 <li>
                     Fostered collaboration and innovation efforts within the company by advancing LLM initiatives through
-                    deployment of multiple model servers with Triton Inference Server's TensorRT-LLM and vLLM.
+                    deployment of multiple model servers with Triton Inference Server&apos;s TensorRT-LLM and vLLM.
                 </li>
                 <li>
                     Unlocked potential to tackle low latency business use cases via optimizing deep learning model inference
                     speed by at least 1.5x optimizations in Triton Inference Server.
                 </li>
                 <li>
-                    Led the successful migration of the team's CI pipelines from GitHub to GitLab, ensuring adherence to the
-                    company's rigorous testing procedures and enhancing overall development efficiency and code quality.
+                    Led the successful migration of the team&apos;s CI pipelines from GitHub to GitLab, ensuring adherence to the
+                    company&apos;s rigorous testing procedures and enhancing overall development efficiency and code quality.
                 </li>
             </ul>
             <br/>
@@ -166,7 +166,7 @@ export default function ResumePage() {
             <ul className="ml-6 list-disc [&>li]:mt-2">
                 <li>
                     Boosted dental clinic profits by enabling dentists to treat more patients by reducing time taken by over 90%
-                    to analyze patient's dental health using TensorFlow and PyTorch for object detection
+                    to analyze patient&apos;s dental health using TensorFlow and PyTorch for object detection
                     (EfficientDet/CenterNet) and segmentation (Mask-RCNN) on DPT, PA, and Bitewing X-rays.
                 </li>
                 <li>
@@ -178,7 +178,7 @@ export default function ResumePage() {
                     dental health diagnosis and treatment suggestions using PHP and JavaScript.
                 </li>
                 <li>
-                    Spearheaded and led company's initial scaling capabilities by deploying models on Kubernetes.
+                    Spearheaded and led company&apos;s initial scaling capabilities by deploying models on Kubernetes.
                 </li>
                 <li>
                     Improved development efficiency by 50% with an MLOps pipeline using CVAT for labelling, MLFlow for
@@ -189,7 +189,7 @@ export default function ResumePage() {
                     with Docker and Kubernetes on cloud.
                 </li>
                 <li>
-                    Collaborated across cross-functional teams throughout product lifecycle to align machine learning team's
+                    Collaborated across cross-functional teams throughout product lifecycle to align machine learning team&apos;s
                     priorities with product goals.
                 </li>
             </ul>
@@ -244,7 +244,7 @@ export default function ResumePage() {
                     on complex dashboards along with occasional maintenance.
                 </li>
                 <li>
-                    Improve company's engineer and non-engineers' technical skillset by conducting a
+                    Improve company&apos;s engineer and non-engineers&apos; technical skillset by conducting a
                     Python Dash lesson for Hewlett Packard employees.
                 </li>
             </ul>
