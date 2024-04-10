@@ -48,7 +48,7 @@ export default function BlogsPage() {
             <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
                 Blogs
             </h1>
-            <HoverEffect items={cards}/>
+            {/* <HoverEffect items={cards}/> */}
         </div>
     );
 }
