@@ -10,7 +10,7 @@ import {
 
 export default function RDAIInProductionPage() {
     return (
-        <div className="container mt-16 py-8">
+        <div className="container my-8">
             <Breadcrumb className="mb-8">
                 <BreadcrumbList>
                     <BreadcrumbItem>

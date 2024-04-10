@@ -28,7 +28,7 @@ const cards = [
 
 export default function HomePage() {
   return (
-    <main className="flex flex-col items-center justify-between pt-16">
+    <main className="flex flex-col items-center justify-between">
       <HeroHighlight>
         <motion.h1
           initial={{
@@ -60,15 +60,23 @@ export default function HomePage() {
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
-        viewport={{ once: true, amount: 0.5 }}
+        viewport={{ once: true, amount: 0.2 }}
         className="p-20 grid grid-cols-2 gap-4"
       >
-        <div>
+        <div className='col-span-2 sm:col-span-1'>
+          <Image
+            width={0}
+            height={0}
+            src="/ng_jian_ming_profile_pic.jpg"
+            alt="Picture of the Ng Jian Ming"
+            style={{ width: 'auto', height: 'auto' }}
+          />
+        </div>
+        <div className='col-span-2 sm:col-span-1'>
           <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-            About
+              About
           </h1>
-          <br />
-          <p className="leading-7 [&:not(:first-child)]:mt-6">
+          <p className="leading-7 mt-2">
             I discovered my passion in the realm of data science towards the end
             of my undergraduate program after being exposed to it through
             business analytics modules.
@@ -95,25 +103,16 @@ export default function HomePage() {
             and there are many avenues to leverage such solutions creatively to solve a problem.
           </p>
         </div>
-        <div>
-          <Image
-            width={0}
-            height={0}
-            src="/ng_jian_ming_profile_pic.jpg"
-            alt="Picture of the Ng Jian Ming"
-            style={{ width: 'auto', height: 'auto' }}
-          />
-        </div>
       </motion.div>
-      <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-          Navigation
-      </h1>
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.5 }}
         className="container w-full"
       >
+        <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
+          Navigation
+        </h1>
         <HoverEffect items={cards}/>
       </motion.div>
     </main>

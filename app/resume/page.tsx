@@ -99,7 +99,7 @@ const TechnicalSkillsSection = ({ technicalSkillsArray }: TechnicalSkillsArrayPr
 
 export default function ResumePage() {
     return (
-        <div className="container mt-16 py-8">
+        <div className="container my-8">
             <Breadcrumb className="mb-8">
                 <BreadcrumbList>
                     <BreadcrumbItem>
@@ -122,7 +122,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Defence Science and Technology Agency (DSTA) - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Jun 2023 - Present
                 </div>
             </div>
@@ -156,7 +156,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     EM2AI (Q&M Dental Group) - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Jun 2020 - Jan 2023
                 </div>
             </div>
@@ -198,7 +198,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     AI Singapore - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Sep 2019 - Jun 2020
                 </div>
             </div>
@@ -220,7 +220,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Hewlett-Packard - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Jan 2019 - Aug 2019
                 </div>
             </div>
@@ -253,7 +253,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Air Liquide - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Jan 2017 - Jun 2017
                 </div>
             </div>
@@ -278,7 +278,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Kheng Leong Company Private Limited - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Apr 2014 - Jun 2014
                 </div>
             </div>
@@ -301,7 +301,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Aviva - Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Jan 2014 - Mar 2014
                 </div>
             </div>
@@ -327,7 +327,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     Singapore Management University
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Aug 2019 - Dec 2021
                 </div>
             </div>
@@ -350,7 +350,7 @@ export default function ResumePage() {
                 <div className="text-lg font-bold">
                     National University Of Singapore
                 </div>
-                <div className="text-lg font-bold justify-self-end">
+                <div className="text-lg text-right font-bold justify-self-end">
                     Aug 2014 - Jul 2018
                 </div>
             </div>
