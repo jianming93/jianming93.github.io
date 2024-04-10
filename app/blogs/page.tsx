@@ -11,24 +11,24 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 
 const cards = [
-    {
-        title: "Incremental Learner",
-        description:
-            "Capstone project with a combination of research + converting it to an actual application.",
-        link: "/projects/incremental-learner",
-    },
-    {
-        title: "Red Dragon AI In Production",
-        description:
-            "LLM project with Triton Inference Server + vLLM",
-        link: "/projects/rdai-in-production",
-    },
-    {
-        title: "TritonFlow",
-        description:
-            "MLOps open-source platform with Triton Inference Server as a core.",
-        link: "/projects/tritonflow",
-    },
+    // {
+    //     title: "Incremental Learner",
+    //     description:
+    //         "Capstone project with a combination of research + converting it to an actual application.",
+    //     link: "/projects/incremental-learner",
+    // },
+    // {
+    //     title: "Red Dragon AI In Production",
+    //     description:
+    //         "LLM project with Triton Inference Server + vLLM",
+    //     link: "/projects/rdai-in-production",
+    // },
+    // {
+    //     title: "TritonFlow",
+    //     description:
+    //         "MLOps open-source platform with Triton Inference Server as a core.",
+    //     link: "/projects/tritonflow",
+    // },
 ]
 
 export default function BlogsPage() {

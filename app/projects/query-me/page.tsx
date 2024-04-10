@@ -37,6 +37,12 @@ export default function IncrementalLearnerPage() {
             >
                 Click here to go to project page.
             </a>
+            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-4">
+                Overview
+            </h2>
+            <p className="leading-7 [&:not(:first-child)]:mt-6">
+
+            </p>
         </div>
     );
 }
