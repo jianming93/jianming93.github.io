@@ -1,3 +1,4 @@
+"use client";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,9 +7,12 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { TypographyP } from "@/components/ui/typographyp";
+import { TypographyH1 } from "@/components/ui/typographyh1";
+import { TypographyH2 } from "@/components/ui/typographyh2";
 
 
-export default function IncrementalLearnerPage() {
+export default function QueryMePage() {
     return (
         <div className="container my-8">
             <Breadcrumb className="mb-8">
@@ -26,9 +30,10 @@ export default function IncrementalLearnerPage() {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+            <TypographyH1>
                 Query Me
-            </h1>
+            </TypographyH1>
+            <br />
             <a
                 href="https://github.com/jianming93/query-me"
                 target="_blank"
@@ -37,12 +42,11 @@ export default function IncrementalLearnerPage() {
             >
                 Click here to go to project page.
             </a>
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-4">
+            <br />
+            <br />
+            <TypographyH2>
                 Overview
-            </h2>
-            <p className="leading-7 [&:not(:first-child)]:mt-6">
-
-            </p>
+            </TypographyH2>
         </div>
     );
 }

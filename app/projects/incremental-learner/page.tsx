@@ -1,3 +1,4 @@
+"use client";
 import {
     Breadcrumb,
     BreadcrumbItem,
@@ -6,6 +7,9 @@ import {
     BreadcrumbPage,
     BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { TypographyP } from "@/components/ui/typographyp";
+import { TypographyH1 } from "@/components/ui/typographyh1";
+import { TypographyH2 } from "@/components/ui/typographyh2";
 
 
 export default function IncrementalLearnerPage() {
@@ -26,9 +30,10 @@ export default function IncrementalLearnerPage() {
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl mb-4">
+            <TypographyH1>
                 Incremental Learner
-            </h1>
+            </TypographyH1>
+            <br />
             <a
                 href="https://github.com/jianming93/incremental_learner"
                 target="_blank"
@@ -37,6 +42,8 @@ export default function IncrementalLearnerPage() {
             >
                 Click here to go to project page.
             </a>
+            <br />
+            <br />
         </div>
     );
 }

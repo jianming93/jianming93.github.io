@@ -51,9 +51,9 @@ export default function HomePage() {
           </Highlight>
           .
           <br />
-          Passionate about all things Data.
+          Passionate about all things Data Science.
           <small className="text-sm font-medium leading-none mt-4 flex justify-center">
-            Powered by: Nextjs | Shadcn | Aceternity UI
+            Powered by: Nextjs | Shadcn | Aceternity UI | Typescript
           </small>
         </motion.h1>
       </HeroHighlight>

@@ -12,12 +12,6 @@ import { HoverEffect } from "@/components/ui/card-hover-effect";
 
 const cards = [
     {
-        title: "TritonFlow",
-        description:
-            "MLOps open-source platform with Triton Inference Server as a core.",
-        link: "/projects/tritonflow",
-    },
-    {
         title: "Red Dragon AI In Production",
         description:
             "LLM project with Triton Inference Server + vLLM",
