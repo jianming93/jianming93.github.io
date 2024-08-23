@@ -59,7 +59,7 @@ export default function RDAIInProductionPage() {
             </TypographyH2>
             <TypographyP>
                 This project intends to demonstrate how to
-                serve an LLM onto Nvidia's Triton Inference Server
+                serve an LLM onto Nvidia&apos;s Triton Inference Server
                 with 
                 <a
                     href="https://docs.vllm.ai/en/latest/"
