@@ -9,6 +9,8 @@ import {
 } from "@/components/ui/breadcrumb";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { TypographyH2 } from "@/components/ui/typographyh2";
+import { TypographyUnorderedList } from "@/components/ui/typographyunorderedlist";
 
 const technicalSkills = [
     {
@@ -97,7 +99,7 @@ const TechnicalSkillsSection = ({ technicalSkillsArray }: TechnicalSkillsArrayPr
 }
 
 
-export default function ResumePage() {
+export default function ExperiencePage() {
     return (
         <div className="container my-8">
             <Breadcrumb className="mb-8">
@@ -107,17 +109,14 @@ export default function ResumePage() {
                     </BreadcrumbItem>
                     <BreadcrumbSeparator />
                     <BreadcrumbItem>
-                        <BreadcrumbPage>Resume</BreadcrumbPage>
+                        <BreadcrumbPage>Experience</BreadcrumbPage>
                     </BreadcrumbItem>
                 </BreadcrumbList>
             </Breadcrumb>
-            <h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-                Resume
-            </h1>
             {/* Experience */}
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-8 first:mt-0">
+            <TypographyH2>
                 Experience
-            </h2>
+            </TypographyH2>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
                     Defence Science and Technology Agency (DSTA) - Singapore
@@ -129,28 +128,16 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 AI Engineer (Jun 2023 - Present)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Reduced runtime costs through streamlining compute resource allocation and abstracting infrastructure
-                    complexities from developers.
-                </li>
-                <li>
-                    Improved company&apos;s product development velocity by developing a ML inference platform on OpenShift
-                    with Python, Arrow, Redis as the backend and React with Typescript as the frontend.
-                </li>
-                <li>
-                    Fostered collaboration and innovation efforts within the company by advancing LLM initiatives through
-                    deployment of multiple model servers with Triton Inference Server&apos;s TensorRT-LLM and vLLM.
-                </li>
-                <li>
-                    Unlocked potential to tackle low latency business use cases via optimizing deep learning model inference
-                    speed by at least 1.5x optimizations in Triton Inference Server.
-                </li>
-                <li>
-                    Led the successful migration of the team&apos;s CI pipelines from GitHub to GitLab, ensuring adherence to the
-                    company&apos;s rigorous testing procedures and enhancing overall development efficiency and code quality.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-hp'>
+                {
+                    [
+                        "Led development of internal platform tools with AI agent capabilities for automation and retrieval augmented generation (RAG) with large language models (LLM) via Nvidia's TensorRT-LLM and vLLM.",
+                        "Reduced runtime costs through streamlining compute resource allocation and abstracting infrastructure complexities from developers, thus saving developers' time by developing a Machine Learning inference platform on OpenShift with Python, Arrow, Redis as the backend and React with Typescript as the frontend.",
+                        "Enabled low latency business use cases via optimisations (e.g., combining layers in model architecture and tuning parameters based on memory constraints) for model inference that is specific to different server's hardware with Nvidia's Triton Inference Server, Model Analyzer and Model Navigator.",
+                        "Led the successful migration of the team's CI pipelines from GitHub to GitLab, ensuring adherence to the company's rigorous testing procedures and enhancing overall development efficiency and code quality."
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -163,36 +150,19 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 AI Engineer (Jun 2020 - Jan 2023)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Boosted dental clinic profits by enabling dentists to treat more patients by reducing time taken by over 90%
-                    to analyze patient&apos;s dental health using TensorFlow and PyTorch for object detection
-                    (EfficientDet/CenterNet) and segmentation (Mask-RCNN) on DPT, PA, and Bitewing X-rays.
-                </li>
-                <li>
-                    Led design and development of a knowledge graph system with JanusGraph as a future clinical decision
-                    support system, enabling potential future dental diagnostic and analytics products.
-                </li>
-                <li>
-                    Improved engagement with patients by creating and deploying an MVP clinical decision support system for
-                    dental health diagnosis and treatment suggestions using PHP and JavaScript.
-                </li>
-                <li>
-                    Spearheaded and led company&apos;s initial scaling capabilities by deploying models on Kubernetes.
-                </li>
-                <li>
-                    Improved development efficiency by 50% with an MLOps pipeline using CVAT for labelling, MLFlow for
-                    experimentation, and CI/CD workflows with GitHub Actions.
-                </li>
-                <li>
-                    Deployed and served machine learning models with FastAPI, TensorFlow Serving, Prometheus and BentoML
-                    with Docker and Kubernetes on cloud.
-                </li>
-                <li>
-                    Collaborated across cross-functional teams throughout product lifecycle to align machine learning team&apos;s
-                    priorities with product goals.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-hp'>
+                {
+                    [
+                        "Boosted dental clinic profits by enabling dentists to treat more patients by reducing time taken by over 90% to analyze patient's dental health using TensorFlow and PyTorch for object detection (EfficientDet/CenterNet) and segmentation (Mask-RCNN) on DPT, PA, and Bitewing X-rays.",
+                        "Led design and development of a knowledge graph system with JanusGraph as a future clinical decision support system, enabling potential future dental diagnostic and analytics products.",
+                        "Improved engagement with patients by creating and deploying an MVP clinical decision support system for dental health diagnosis and treatment suggestions using PHP and JavaScript.",
+                        "Spearheaded company's initial scaling capabilities by deploying models on Kubernetes.",
+                        "Improved development efficiency by 50% with an MLOps pipeline using CVAT for labelling, MLFlow for experimentation, and CI/CD workflows with GitHub Actions.",
+                        "Deployed and served machine learning models with FastAPI, TensorFlow Serving, Prometheus and BentoML with Docker and Kubernetes on cloud.",
+                        "Collaborated across cross-functional teams throughout product lifecycle to align machine learning team's priorities with product goals."
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -205,16 +175,14 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 AI Engineer Apprentice (Sep 2019 - Jun 2020)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Developed initial AI (Faster R-CNN and YOLOv3) object detection capabilities for dental X-ray
-                    detection using Docker, TensorFlow and Flask API.
-                </li>
-                <li>
-                    Improved generalisation of deep learning models for object detection by ensuring consistent data
-                    quality and distribution through conducting in-depth data exploration and analytics.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-hp'>
+                {
+                    [
+                        "Developed initial AI (Faster R-CNN and YOLOv3) object detection capabilities for dental X-ray detection using Docker, TensorFlow and Flask API.",
+                        "Improved generalisation of deep learning models for object detection by ensuring consistent data quality and distribution through conducting in-depth data exploration and analytics.",
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -227,27 +195,16 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 Data Analytics and Digitisation Intern (Jan 2019 - Aug 2019)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Reduced 3 man hours per report weekly by automating 3 weekly reports
-                    using Python with smart hourly detection capabilities to inform engineers
-                    about out-of-bound product specifications
-                </li>
-                <li>
-                    Reduced 8 man hours weekly by deploying and developing production-grade dashboards
-                    from scratch with statistical analysis embedded in them via collaboration with
-                    data scientists using Python Dash and RShiny.
-                </li>
-                <li>
-                    Strong Software Development Lifecycle (SDLC) experience for analytics product from
-                    ideation phase to pipe-lining and transforming data from database to perform visualisation
-                    on complex dashboards along with occasional maintenance.
-                </li>
-                <li>
-                    Improve company&apos;s engineer and non-engineers&apos; technical skillset by conducting a
-                    Python Dash lesson for Hewlett Packard employees.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-hp'>
+                {
+                    [
+                        "Reduced 3 man hours per report weekly by automating 3 weekly reports using Python with smart hourly detection capabilities to inform engineers about out-of-bound product specifications",
+                        "Reduced 8 man hours weekly by deploying and developing production-grade dashboards from scratch with statistical analysis embedded in them via collaboration with data scientists using Python Dash and RShiny.",
+                        "Strong Software Development Lifecycle (SDLC) experience for analytics product from ideation phase to pipe-lining and transforming data from database to perform visualisation on complex dashboards along with occasional maintenance.",
+                        "Improve company's engineer and non-engineers' technical skillset by conducting a Python Dash lesson for Hewlett Packard employees."
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -260,19 +217,15 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 Process Engineer Intern (Jan 2017 - Jun 2017)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Successfully executed projects to improve overall plan safety and functionality.
-                </li>
-                <li>
-                    Solely converted and replicated database functions during database migration of
-                    site from Microsoft Access to Google Sheet.
-                    Conducted training for all technicians and engineers in usage of new database.
-                </li>
-                <li>
-                    Efficiently resolved ad-hoc issues alongside engineers and technicians.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-air-liquide'>
+                {
+                    [
+                        "Successfully executed projects to improve overall plan safety and functionality.",
+                        "Solely converted and replicated database functions during database migration of site from Microsoft Access to Google Sheet. Conducted training for all technicians and engineers in usage of new database.",
+                        "Efficiently resolved ad-hoc issues alongside engineers and technicians."
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -285,17 +238,15 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 Customer Service Executive (Apr 2014 - Jun 2014)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Preparation for logistics for handover of condominium units (i.e handover keys).
-                </li>
-                <li>
-                    Attended to customer enquiries via phone call or during handover.
-                </li>
-                <li>
-                    Liaised with contractors to resolve unit issues.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-kheng-leong'>
+                {
+                    [
+                        "Preparation for logistics for handover of condominium units (i.e handover keys).",
+                        "Attended to customer enquiries via phone call or during handover.",
+                        "Liaised with contractors to resolve unit issues."
+                    ]
+                }
+            </TypographyUnorderedList>
             <br/>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
@@ -308,21 +259,20 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 Executive Administrative Assistant (Jan 2014 - Mar 2014)
             </small>
-            <ul className="ml-6 list-disc [&>li]:mt-2">
-                <li>
-                    Retrieved data for car specifications for most models available in Singapore market.
-                </li>
-                <li>
-                    Analysed insurance premium prices from different insurance companies.
-                </li>
-                <li>
-                    Assisted in approval of small insurance claims.
-                </li>
-            </ul>
+            <TypographyUnorderedList name='experience-aviva'>
+                {
+                    [
+                        "Retrieved data for car specifications for most models available in Singapore market.",
+                        "Analysed insurance premium prices from different insurance companies.",
+                        "Assisted in approval of small insurance claims."
+                    ]
+                }
+            </TypographyUnorderedList>
+            <br />
             {/* Education */}
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-8 first:mt-0">
+            <TypographyH2>
                 Education
-            </h2>
+            </TypographyH2>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
                     Singapore Management University
@@ -357,15 +307,18 @@ export default function ResumePage() {
             <small className="text-sm font-bold leading-none">
                 Bachelor of Engineering in Chemical Engineering
             </small>
+            <br />
+            <br />
             {/* Technical Skills */}
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-8 first:mt-0">
+            <TypographyH2>
                 Technical Skills
-            </h2>
+            </TypographyH2>
             <TechnicalSkillsSection technicalSkillsArray={technicalSkills} />
+            <br />
             {/* Achievements */}
-            <h2 className="scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight mt-8 first:mt-0">
+            <TypographyH2>
                 Achievements
-            </h2>
+            </TypographyH2>
             <ul className="ml-6 list-disc [&>li]:mt-2">
                 <li>
                     Placed top 25% in Shopee National Data Science Competition (Advanced Category)

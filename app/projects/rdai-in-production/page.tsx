@@ -53,14 +53,13 @@ export default function RDAIInProductionPage() {
                 in the project page.
             </TypographyBlockquote>
             <br />
-            <br />
             <TypographyH2>
                 Overview
             </TypographyH2>
             <TypographyP>
                 This project intends to demonstrate how to
                 serve an LLM onto Nvidia&apos;s Triton Inference Server
-                with 
+                with
                 <a
                     href="https://docs.vllm.ai/en/latest/"
                     target="_blank"
@@ -95,6 +94,7 @@ export default function RDAIInProductionPage() {
                         ]
                     }
             </TypographyOrderedList>
+            <br />
             <TypographyH2>
                 Chatbot
             </TypographyH2>

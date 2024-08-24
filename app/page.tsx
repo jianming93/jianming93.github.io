@@ -13,16 +13,10 @@ const cards = [
     link: "/projects",
   },
   {
-    title: "Resume",
+    title: "Experience",
     description:
-      "My detailed resume.",
-    link: "/resume",
-  },
-  {
-    title: "Blogs",
-    description:
-      "My personal blog posts.",
-    link: "/blogs",
+      "My detailed work experience.",
+    link: "/experience",
   },
 ]
 

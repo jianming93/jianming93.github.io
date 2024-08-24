@@ -7,7 +7,7 @@ type TypographyOrderedListProps = {
 
 export function TypographyOrderedList( { name, children }: TypographyOrderedListProps ) {
     return (
-      <ol className="my-6 ml-6 list-decimal [&>li]:mt-2">
+      <ol className="ml-6 list-decimal [&>li]:mt-2">
         {
             children.map((point: ReactNode, index) => {
                 return (
@@ -20,4 +20,3 @@ export function TypographyOrderedList( { name, children }: TypographyOrderedList
       </ol>
     )
   }
-  

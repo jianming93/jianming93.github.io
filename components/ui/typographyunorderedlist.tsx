@@ -7,7 +7,7 @@ type TypographyUnorderedListProps = {
 
 export function TypographyUnorderedList( { name, children }: TypographyUnorderedListProps ) {
     return (
-      <ul className="my-6 ml-6 list-disc [&>li]:mt-2">
+      <ul className="ml-6 list-disc [&>li]:mt-2">
         {
             children.map((point: ReactNode, index) => {
                 return (
@@ -22,4 +22,3 @@ export function TypographyUnorderedList( { name, children }: TypographyUnordered
       </ul>
     )
   }
-  
