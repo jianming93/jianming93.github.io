@@ -173,6 +173,7 @@ export default function RDAIInProductionPage() {
                     ]
                 }
             </TypographyOrderedList>
+            <br />
             <div className="flex justify-center">
                 <Image
                     width={0}
@@ -199,6 +200,7 @@ export default function RDAIInProductionPage() {
                 the existing prompt templates to allow user to modify any configuration that
                 they need.
             </TypographyP>
+            <br />
             <div className="flex justify-center">
                 <Image
                     width={0}
@@ -214,6 +216,7 @@ export default function RDAIInProductionPage() {
                     Edit existing prompt template tab contents.
                 </TypographyMuted>
             </div>
+            <br />
             <TypographyH2>
                 Improvements
             </TypographyH2>

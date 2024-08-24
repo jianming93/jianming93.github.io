@@ -62,7 +62,7 @@ export default function HomePage() {
             width={0}
             height={0}
             src="/ng_jian_ming_profile_pic.jpg"
-            alt="Picture of the Ng Jian Ming"
+            alt="ng_jian_ming_profile_pic"
             style={{ width: 'auto', height: 'auto' }}
           />
         </div>

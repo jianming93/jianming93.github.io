@@ -76,7 +76,7 @@ const TechnicalSkillsSection = ({ technicalSkillsArray }: TechnicalSkillsArrayPr
             {
                 technicalSkillsArray.map((technicalSkills, index) => (
                     <>
-                        <div className="text-lg font-bold">
+                        <div className="py-2 text-lg font-bold">
                             {technicalSkills.title}
                         </div>
                         <div>

@@ -246,7 +246,6 @@ export default function IncrementalLearnerPage() {
                     PCA of shell means which function as centroids of the shells.
                 </TypographyMuted>
             </div>
-            <br />
             <TypographyP>
                 It is known that deeper the model architecture,
                 the richer the semantics are in a deep learning model,

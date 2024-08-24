@@ -4,19 +4,16 @@ import Link from 'next/link'
 import { Inter } from "next/font/google";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
-  navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { Sheet, SheetContent, SheetTrigger, SheetClose } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
 import { Linkedin } from "lucide-react";
 import { Icons } from "@/components/ui/icons";
 import { ModeToggle } from "@/components/ui/mode-toggle";
+import { SiteFooter } from "@/components/ui/sitefooter";
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -114,20 +111,11 @@ export default function RootLayout({
                     </SheetClose>
                     <SheetClose asChild>
                       <Link
-                        href="/resume"
+                        href="/experience"
                         className="text-muted-foreground hover:text-foreground"
                         passHref
                       >
-                        Resume
-                      </Link>
-                    </SheetClose>
-                    <SheetClose asChild>
-                      <Link
-                        href="/blogs"
-                        className="text-muted-foreground hover:text-foreground"
-                        passHref
-                      >
-                        Blogs
+                        Experience
                       </Link>
                     </SheetClose>
                   </nav>
@@ -176,9 +164,10 @@ export default function RootLayout({
                 </div>
             </header>
             {/* Main Content */}
-            <div className={inter.className}>
+            <div className={`${inter.className} flex-1`}>
               {children}
             </div>
+            <SiteFooter />
           </div>
         </ThemeProvider>
       </body>
