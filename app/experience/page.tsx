@@ -119,6 +119,24 @@ export default function ExperiencePage() {
             </TypographyH2>
             <div className="grid grid-cols-2 gap-4 mt-2">
                 <div className="text-lg font-bold">
+                    GoTo - Singapore
+                </div>
+                <div className="text-lg text-right font-bold justify-self-end">
+                    Feb 2025 - Present
+                </div>
+            </div>
+            <small className="text-sm font-bold leading-none">
+                Senior Data Scientist (Feb 2025 - Present)
+            </small>
+            <TypographyUnorderedList name='experience-goto'>
+                {
+                    [
+                    ]
+                }
+            </TypographyUnorderedList>
+            <br/>
+            <div className="grid grid-cols-2 gap-4 mt-2">
+                <div className="text-lg font-bold">
                     Defence Science and Technology Agency (DSTA) - Singapore
                 </div>
                 <div className="text-lg text-right font-bold justify-self-end">
@@ -128,7 +146,7 @@ export default function ExperiencePage() {
             <small className="text-sm font-bold leading-none">
                 AI Engineer (Jun 2023 - Feb 2025)
             </small>
-            <TypographyUnorderedList name='experience-hp'>
+            <TypographyUnorderedList name='experience-dsta'>
                 {
                     [
                         "Led development of internal platform tools with AI agent capabilities for automation and retrieval augmented generation (RAG) with large language models (LLM) via Nvidia's TensorRT-LLM and vLLM.",
