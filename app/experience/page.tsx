@@ -122,11 +122,11 @@ export default function ExperiencePage() {
                     Defence Science and Technology Agency (DSTA) - Singapore
                 </div>
                 <div className="text-lg text-right font-bold justify-self-end">
-                    Jun 2023 - Present
+                    Jun 2023 - Feb 2025
                 </div>
             </div>
             <small className="text-sm font-bold leading-none">
-                AI Engineer (Jun 2023 - Present)
+                AI Engineer (Jun 2023 - Feb 2025)
             </small>
             <TypographyUnorderedList name='experience-hp'>
                 {
