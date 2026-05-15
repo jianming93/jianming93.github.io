@@ -44,30 +44,36 @@ export default function RootLayout({
                 <NavigationMenu id="nav-menu-links">
                   <NavigationMenuList id="nav-menu-list-links">
                     <NavigationMenuItem>
-                      <Link href="/" legacyBehavior passHref>
-                          <Button
-                            className="rounded"
-                            variant="ghost"
-                            size="icon"
-                            type="button"
-                          >
-                            <Icons.home className="h-[1.2rem] w-[1.2rem]"/>
-                          </Button>
-                      </Link>
+                      <Button
+                        asChild
+                        className="rounded"
+                        variant="ghost"
+                        size="icon"
+                      >
+                        <Link href="/">
+                          <Icons.home className="h-[1.2rem] w-[1.2rem]"/>
+                        </Link>
+                      </Button>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link href="/projects" legacyBehavior passHref>
-                        <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="/projects"
+                          className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                        >
                           Projects
-                        </NavigationMenuLink>
-                      </Link>
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                     <NavigationMenuItem>
-                      <Link href="/experience" legacyBehavior passHref>
-                        <NavigationMenuLink className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50">
+                      <NavigationMenuLink asChild>
+                        <Link
+                          href="/experience"
+                          className="group inline-flex h-10 w-max items-center justify-center rounded bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50 data-[active]:bg-accent/50 data-[state=open]:bg-accent/50"
+                        >
                           Experience
-                        </NavigationMenuLink>
-                      </Link>
+                        </Link>
+                      </NavigationMenuLink>
                     </NavigationMenuItem>
                   </NavigationMenuList>
                 </NavigationMenu>
@@ -125,36 +131,36 @@ export default function RootLayout({
                   <NavigationMenu id="nav-menu-misc">
                     <NavigationMenuList id="nav-menu-list-misc">
                       <NavigationMenuItem>
-                        <Link
-                          href="http://www.linkedin.com/in/ngjianming"
-                          target={"_blank"}
-                          rel={"noreferrer"}
+                        <Button
+                          asChild
+                          className="rounded"
+                          variant="ghost"
+                          size="icon"
                         >
-                          <Button
-                            className="rounded"
-                            variant="ghost"
-                            size="icon"
-                            type="button"
+                          <Link
+                            href="http://www.linkedin.com/in/ngjianming"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <Linkedin className="h-[1.2rem] w-[1.2rem]"/>
-                          </Button>
-                        </Link>
+                          </Link>
+                        </Button>
                       </NavigationMenuItem>
                       <NavigationMenuItem>
-                        <Link
-                          href="https://github.com/jianming93/"
-                          target={"_blank"}
-                          rel={"noreferrer"}
+                        <Button
+                          asChild
+                          className="rounded"
+                          variant="ghost"
+                          size="icon"
                         >
-                          <Button
-                            className="rounded"
-                            variant="ghost"
-                            size="icon"
-                            type="button"
+                          <Link
+                            href="https://github.com/jianming93/"
+                            target="_blank"
+                            rel="noreferrer"
                           >
                             <Icons.gitHub className="h-[1.2rem] w-[1.2rem]"/>
-                          </Button>
-                        </Link>
+                          </Link>
+                        </Button>
                       </NavigationMenuItem>
                       <NavigationMenuItem>
                         <ModeToggle />
