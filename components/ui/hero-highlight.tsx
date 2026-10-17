@@ -31,7 +31,7 @@ export const HeroHighlight = ({
   return (
     <div
       className={cn(
-        "relative h-[40rem] flex items-center justify-center w-full group",
+        "relative h-160 flex items-center justify-center w-full group",
         containerClassName
       )}
       onMouseMove={handleMouseMove}
@@ -57,7 +57,7 @@ export const HeroHighlight = ({
         }}
       />
       {showGradient && (
-        <div className="absolute inset-0 h-full w-full  pointer-events-none bg-white dark:bg-black [mask-image:radial-gradient(ellipse_at_center,transparent,white)]" />
+        <div className="absolute inset-0 h-full w-full  pointer-events-none bg-white dark:bg-black mask-[radial-gradient(ellipse_at_center,transparent,white)]" />
       )}
       <div className={cn("relative z-20", className)}>{children}</div>
     </div>
@@ -90,7 +90,7 @@ export const Highlight = ({
         display: "inline",
       }}
       className={cn(
-        `relative inline-block pb-1   px-1 rounded-lg bg-gradient-to-r from-blue-300 to-red-300 dark:from-blue-900 dark:to-red-900`,
+        `relative inline-block pb-1   px-1 rounded-lg bg-linear-to-r from-blue-300 to-red-300 dark:from-blue-900 dark:to-red-900`,
         className
       )}
     >

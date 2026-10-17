@@ -41,21 +41,21 @@ export const StickyScroll = ({
   });
 
   const backgroundColors = [
-    "var(--slate-900)",
-    "var(--black)",
-    "var(--neutral-900)",
+    "var(--color-slate-900)",
+    "var(--color-black)",
+    "var(--color-neutral-900)",
   ];
   const linearGradients = [
-    "linear-gradient(to bottom right, var(--cyan-500), var(--emerald-500))",
-    "linear-gradient(to bottom right, var(--pink-500), var(--indigo-500))",
-    "linear-gradient(to bottom right, var(--orange-500), var(--yellow-500))",
+    "linear-gradient(to bottom right, var(--color-cyan-500), var(--color-emerald-500))",
+    "linear-gradient(to bottom right, var(--color-pink-500), var(--color-indigo-500))",
+    "linear-gradient(to bottom right, var(--color-orange-500), var(--color-yellow-500))",
   ];
   return (
     <motion.div
       animate={{
         backgroundColor: backgroundColors[activeCard % backgroundColors.length],
       }}
-      className="h-[30rem] overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
+      className="h-120 overflow-y-auto flex justify-center relative space-x-10 rounded-md p-10"
       ref={ref}
     >
       <div className="div relative flex items-start px-4">
