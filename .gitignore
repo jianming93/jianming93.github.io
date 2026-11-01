@@ -1,36 +1,48 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# build output
+dist/
+.astro/
 
 # dependencies
-/node_modules
-/.pnp
-.pnp.js
-.yarn/install-state.gz
+node_modules/
 
-# testing
-/coverage
-
-# next.js
-/.next/
-/out/
-
-# production
-/build
-
-# misc
-.DS_Store
-*.pem
-
-# debug
+# logs
 npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
 
-# local env files
-.env*.local
+# environment
+.env
+.env.*
 
-# vercel
-.vercel
+# OS / editor
+.DS_Store
+.vscode/*
+!.vscode/extensions.json
+.idea/
 
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+# labs: language toolchains and build output
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+build/
+target/
+*.o
+*.obj
+*.so
+*.dylib
+*.cubin
+*.fatbin
+*.ptx.o
+.triton/
+*.ipynb_checkpoints
+# never commit weights or datasets
+*.pt
+*.pth
+*.safetensors
+*.bin
+*.npz
+labs/**/data/
+labs/**/checkpoints/

@@ -1,0 +1,23 @@
+---
+import { getLayer, type LayerId } from '../data/layers';
+import { url } from '../lib/site';
+
+interface Props {
+  layer: LayerId;
+  link?: boolean;
+}
+const { layer, link = true } = Astro.props;
+const l = getLayer(layer);
+---
+
+{
+  link ? (
+    <a class="layer-tag" href={url(`/tags/${l.id}/`)} style={`--layer-color:${l.color}`}>
+      #{l.id}
+    </a>
+  ) : (
+    <span class="layer-tag" style={`--layer-color:${l.color}`}>
+      #{l.id}
+    </span>
+  )
+}

@@ -1,0 +1,48 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getProjects, url, type Project } from '../../lib/site';
+
+export async function getStaticPaths() {
+  const projects = await getProjects();
+  return projects.map((project) => ({ params: { slug: project.id }, props: { project } }));
+}
+
+interface Props {
+  project: Project;
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+const { title, description, repo } = project.data;
+---
+
+<BaseLayout title={title} description={description}>
+  <div class="wrap">
+    <PageHeader title={title} lede={description}>
+      <nav slot="above" class="crumbs" aria-label="Breadcrumb">
+        <a href={url('/projects/')}>Projects</a>
+      </nav>
+      <p class="repo"><a href={repo} rel="noopener noreferrer">View the project on GitHub</a></p>
+    </PageHeader>
+    <div class="prose body"><Content /></div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full width: the Markdown body is not capped at the reading measure. */
+  .body {
+    max-width: none;
+  }
+  .crumbs {
+    font-size: var(--step--1);
+    margin-bottom: 0.5rem;
+  }
+  .crumbs a {
+    color: var(--ink-soft);
+  }
+  .repo {
+    font-size: var(--step--1);
+  }
+</style>

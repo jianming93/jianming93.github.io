@@ -1,0 +1,76 @@
+---
+// Embed a region of a real source file from /labs, highlighted by Expressive Code.
+//
+//   import Snippet from '../../components/Snippet.astro';
+//   <Snippet file="kernels/online-softmax/md_reduce.cuh" region="merge" mark={[3]} />
+//
+// Regions are marked in the source with comments: `// region merge` … `// endregion`
+// (see labs/README.md). Any Expressive Code prop works here too: title, mark, ins,
+// del, collapse, showLineNumbers, wrap, frame, meta.
+import { Code } from 'astro-expressive-code/components';
+import { loadSnippet } from '../lib/labs';
+import { labsUrl } from '../lib/site';
+
+interface Props {
+  file: string;
+  region?: string;
+  lines?: string;
+  lang?: string;
+  title?: string;
+  /** Show line numbers that match the source file. */
+  showLineNumbers?: boolean;
+  /** Hide the "view source" link under the block. */
+  noSource?: boolean;
+  [key: string]: unknown;
+}
+
+const { file, region, lines, lang, title, showLineNumbers, noSource, ...rest } = Astro.props;
+const snippet = await loadSnippet({ file, region, lines });
+const name = file.split('/').pop();
+const href = labsUrl(file, snippet.startLine, snippet.endLine);
+const spansWholeFile = snippet.startLine === 1 && !region && !lines;
+---
+
+<figure class="snippet">
+  <Code
+    code={snippet.code}
+    lang={lang ?? snippet.lang}
+    title={title ?? name}
+    showLineNumbers={showLineNumbers}
+    startLineNumber={showLineNumbers ? snippet.startLine : undefined}
+    {...rest}
+  />
+  {
+    !noSource && (
+      <figcaption>
+        <a href={href}>
+          {spansWholeFile ? `labs/${file}` : `labs/${file}, lines ${snippet.startLine}–${snippet.endLine}`}
+        </a>
+      </figcaption>
+    )
+  }
+</figure>
+
+<style>
+  .snippet {
+    margin: 1.5em 0;
+  }
+  .snippet :global(.expressive-code) {
+    margin: 0;
+  }
+  figcaption {
+    font-family: var(--font-ui);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+    text-align: right;
+    margin-top: 0.35rem;
+  }
+  figcaption a {
+    color: inherit;
+    text-decoration: none;
+  }
+  figcaption a:hover {
+    color: var(--ink-soft);
+    text-decoration: underline;
+  }
+</style>

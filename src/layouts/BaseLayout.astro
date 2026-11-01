@@ -1,0 +1,432 @@
+---
+// Fonts are self-hosted (bundled from npm), so pages make no third-party requests.
+import '@fontsource-variable/schibsted-grotesk';
+import '@fontsource-variable/literata/opsz.css';
+import '@fontsource-variable/literata/opsz-italic.css';
+import '@fontsource-variable/jetbrains-mono';
+import '../styles/theme.css';
+import '../styles/global.css';
+import '../styles/ui.css';
+import { LAYER_CSS } from '../data/layers';
+import { SITE_TITLE, SITE_DESCRIPTION, AUTHOR, OG_IMAGE, GITHUB_URL, LINKEDIN_URL, STACK, url } from '../lib/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  /** Used for <meta property="og:type">. */
+  type?: 'website' | 'article';
+  /** Site-relative path to the social-preview image. Defaults to the site card. */
+  image?: string;
+}
+
+const { title, description = SITE_DESCRIPTION, type = 'website', image = OG_IMAGE } = Astro.props;
+const imageUrl = new URL(url(image), Astro.site);
+const pageTitle = title ? `${title} | ${SITE_TITLE}` : SITE_TITLE;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const path = Astro.url.pathname;
+
+const nav = [
+  { href: url('/posts/'), label: 'Posts' },
+  { href: url('/projects/'), label: 'Projects' },
+  { href: url('/experience/'), label: 'Experience' },
+];
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+    <link rel="sitemap" href={url('/sitemap-index.xml')} />
+
+    <meta property="og:type" content={type} />
+    <meta property="og:title" content={title ?? SITE_TITLE} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:image" content={imageUrl} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={imageUrl} />
+    <meta name="author" content={AUTHOR} />
+    <link rel="alternate" type="application/rss+xml" title={`${SITE_TITLE} (RSS)`} href={url('/rss.xml')} />
+
+    <!-- Set the theme before first paint to avoid a flash. -->
+    <script is:inline>
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (e) {}
+        var theme = stored === 'light' || stored === 'dark' ? stored : (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      })();
+    </script>
+    <style is:inline set:html={LAYER_CSS}></style>
+    <slot name="head" />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="site-header">
+      <div class="wrap bar">
+        <div class="left">
+          <button class="icon-btn nav-toggle" type="button" aria-label="Menu" aria-expanded="false" aria-controls="main-nav">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"></path></svg>
+          </button>
+          <a class="icon-btn home" href={url('/')} aria-label="Home" title="Home">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M3 10.5 12 3l9 7.5M5 9.5V20a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1V9.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path></svg>
+          </a>
+          <nav id="main-nav" aria-label="Main">
+            <ul>
+              {
+                nav.map((item) => (
+                  <li>
+                    <a href={item.href} aria-current={path.startsWith(item.href) ? 'page' : undefined}>
+                      {item.label}
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
+
+        <div class="right">
+          <a class="icon-btn" href={LINKEDIN_URL} aria-label="LinkedIn" title="LinkedIn" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45ZM22.22 0H1.77C.79 0 0 .77 0 1.73v20.54C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.73C24 .77 23.2 0 22.22 0Z"></path></svg>
+          </a>
+          <a class="icon-btn" href={GITHUB_URL} aria-label="GitHub" title="GitHub" rel="noopener noreferrer">
+            <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 .3a12 12 0 0 0-3.8 23.4c.6.1.8-.3.8-.6v-2c-3.3.7-4-1.6-4-1.6-.6-1.4-1.4-1.8-1.4-1.8-1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.8 1.3 3.5 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.5-1.3-5.5-5.9 0-1.3.5-2.4 1.2-3.2-.1-.3-.5-1.5.1-3.2 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.7 1.7.2 2.9.1 3.2.8.8 1.2 1.9 1.2 3.2 0 4.6-2.8 5.6-5.5 5.9.4.4.8 1.1.8 2.2v3.3c0 .3.2.7.8.6A12 12 0 0 0 12 .3Z"></path></svg>
+          </a>
+
+          <div class="theme-menu">
+            <button class="icon-btn theme-btn" type="button" aria-label="Choose colour theme" title="Choose colour theme" aria-haspopup="menu" aria-expanded="false" aria-controls="theme-list">
+              <svg class="sun" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <circle cx="12" cy="12" r="4.2" fill="currentColor"></circle>
+                <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M5.3 18.7l1.6-1.6M17.1 6.9l1.6-1.6"></path>
+                </g>
+              </svg>
+              <svg class="moon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path fill="currentColor" d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"></path>
+              </svg>
+              <svg class="monitor" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true">
+                <path d="M3 5h18v11H3zM9 20h6M12 16v4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"></path>
+              </svg>
+            </button>
+            <ul id="theme-list" class="theme-list" role="menu" hidden>
+              <li role="none"><button type="button" role="menuitemradio" data-value="light" aria-checked="false">Light</button></li>
+              <li role="none"><button type="button" role="menuitemradio" data-value="dark" aria-checked="false">Dark</button></li>
+              <li role="none"><button type="button" role="menuitemradio" data-value="system" aria-checked="false">System</button></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <slot />
+    </main>
+
+    <footer class="site-footer">
+      <div class="wrap foot">
+        <div>
+          <p>&copy; {new Date().getFullYear()} {AUTHOR}</p>
+          <p class="powered">
+            Powered by:{' '}
+            {STACK.map((t, i) => (<><a href={t.href}>{t.name}</a>{i < STACK.length - 1 && ' | '}</>))}
+          </p>
+        </div>
+        <p class="foot-links">
+          <a href={url('/tags/')}>Tags</a>
+          <a href={url('/rss.xml')}>RSS</a>
+          <a href={GITHUB_URL}>GitHub</a>
+          <a href={LINKEDIN_URL}>LinkedIn</a>
+        </p>
+      </div>
+    </footer>
+
+    <script>
+      // Basecoat UI behaviour for the components that need JavaScript (about 4 KB gzipped).
+      // Dialogs, tooltips, cards, badges, alerts and tables are CSS-only and need nothing here.
+      // To use select, combobox, command, drawer, toast or sidebar, add their import below,
+      // e.g. import 'basecoat-css/select';
+      import 'basecoat-css/basecoat';
+      import 'basecoat-css/tabs';
+      import 'basecoat-css/accordion';
+      import 'basecoat-css/popover';
+      import 'basecoat-css/dropdown-menu';
+
+      // ---- Theme: light | dark | system (system follows the OS and is the default) ----
+      type Pref = 'light' | 'dark' | 'system';
+      const root = document.documentElement;
+      const mq = matchMedia('(prefers-color-scheme: dark)');
+      const themeBtn = document.querySelector<HTMLButtonElement>('.theme-btn')!;
+      const themeList = document.querySelector<HTMLElement>('#theme-list')!;
+      const options = [...themeList.querySelectorAll<HTMLButtonElement>('button[data-value]')];
+
+      function getPref(): Pref {
+        try {
+          const v = localStorage.getItem('theme');
+          if (v === 'light' || v === 'dark') return v;
+        } catch {}
+        return 'system';
+      }
+      function apply(pref: Pref) {
+        root.setAttribute('data-theme', pref === 'system' ? (mq.matches ? 'dark' : 'light') : pref);
+        root.setAttribute('data-theme-pref', pref);
+        options.forEach((o) => o.setAttribute('aria-checked', String(o.dataset.value === pref)));
+      }
+      function setPref(pref: Pref) {
+        try {
+          if (pref === 'system') localStorage.removeItem('theme');
+          else localStorage.setItem('theme', pref);
+        } catch {}
+        apply(pref);
+      }
+      apply(getPref());
+      mq.addEventListener('change', () => getPref() === 'system' && apply('system'));
+
+      function setMenu(open: boolean, refocus = false) {
+        themeList.hidden = !open;
+        themeBtn.setAttribute('aria-expanded', String(open));
+        if (open) options.find((o) => o.getAttribute('aria-checked') === 'true')?.focus();
+        else if (refocus) themeBtn.focus();
+      }
+      themeBtn.addEventListener('click', () => setMenu(!!themeList.hidden));
+      options.forEach((o) =>
+        o.addEventListener('click', () => {
+          setPref(o.dataset.value as Pref);
+          setMenu(false, true);
+        }),
+      );
+      themeList.addEventListener('keydown', (e) => {
+        const i = options.indexOf(document.activeElement as HTMLButtonElement);
+        if (e.key === 'ArrowDown') (options[(i + 1) % options.length]).focus();
+        else if (e.key === 'ArrowUp') (options[(i - 1 + options.length) % options.length]).focus();
+        else return;
+        e.preventDefault();
+      });
+      document.addEventListener('click', (e) => {
+        if (!themeList.hidden && !(e.target as Element).closest('.theme-menu')) setMenu(false);
+      });
+
+      // ---- Mobile menu ----
+      const navBtn = document.querySelector<HTMLButtonElement>('.nav-toggle')!;
+      const bar = document.querySelector<HTMLElement>('.bar')!;
+      function setNav(open: boolean) {
+        bar.toggleAttribute('data-nav-open', open);
+        navBtn.setAttribute('aria-expanded', String(open));
+      }
+      navBtn.addEventListener('click', () => setNav(!bar.hasAttribute('data-nav-open')));
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (!themeList.hidden) setMenu(false, true);
+        setNav(false);
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .skip {
+    position: absolute;
+    left: -999px;
+    top: 0.5rem;
+    background: var(--surface);
+    padding: 0.5rem 0.8rem;
+    z-index: 10;
+  }
+  .skip:focus {
+    left: 0.5rem;
+  }
+
+  .site-header {
+    border-bottom: 1px solid var(--rule);
+  }
+  .bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 0.7rem;
+  }
+  .left,
+  .right {
+    display: flex;
+    align-items: center;
+  }
+  .left {
+    gap: 0.5rem 1.75rem;
+  }
+  .right {
+    gap: 0.35rem;
+  }
+  .icon-btn.nav-toggle {
+    display: none;
+  }
+  @media (max-width: 760px) {
+    .icon-btn.nav-toggle {
+      display: inline-grid;
+    }
+    .left {
+      gap: 0.6rem;
+    }
+    nav {
+      display: none;
+      position: absolute;
+      inset: 100% 0 auto 0;
+      z-index: 5;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: 0.75rem var(--gutter) 1rem;
+    }
+    .bar[data-nav-open] nav {
+      display: block;
+    }
+    .bar nav ul {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.6rem;
+    }
+    .bar nav a {
+      font-size: 1.05rem;
+    }
+  }
+  .site-header {
+    position: relative;
+  }
+  nav ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.2rem 1.15rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  nav a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+  }
+  nav a:hover,
+  nav a[aria-current='page'] {
+    color: var(--ink);
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+  }
+  .icon-btn {
+    display: inline-grid;
+    place-items: center;
+    width: 2.1rem;
+    height: 2.1rem;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: var(--ink-soft);
+    cursor: pointer;
+  }
+  .icon-btn:hover,
+  .icon-btn[aria-expanded='true'] {
+    color: var(--ink);
+    background: var(--muted);
+  }
+  /* Show one icon: sun / moon when you picked Light / Dark, a monitor for System. */
+  .theme-btn .monitor,
+  .theme-btn .sun,
+  .theme-btn .moon {
+    display: none;
+  }
+  :global(:root:not([data-theme-pref='light']):not([data-theme-pref='dark'])) .theme-btn .monitor,
+  :global([data-theme-pref='light']) .theme-btn .sun,
+  :global([data-theme-pref='dark']) .theme-btn .moon {
+    display: block;
+  }
+  .theme-menu {
+    position: relative;
+  }
+  .theme-list {
+    position: absolute;
+    right: 0;
+    top: calc(100% + 0.4rem);
+    z-index: 20;
+    min-width: 8rem;
+    margin: 0;
+    padding: 0.25rem;
+    list-style: none;
+    background: var(--popover);
+    color: var(--popover-foreground);
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.12);
+  }
+  .theme-list[hidden] {
+    display: none;
+  }
+  .theme-list button {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    padding: 0.4rem 0.6rem;
+    border: 0;
+    border-radius: calc(var(--radius) - 2px);
+    background: transparent;
+    color: inherit;
+    font: inherit;
+    font-size: 0.92rem;
+    text-align: left;
+    cursor: pointer;
+  }
+  .theme-list button:hover,
+  .theme-list button:focus-visible {
+    background: var(--muted);
+    outline: none;
+  }
+  .theme-list button[aria-checked='true']::after {
+    content: '✓';
+    color: var(--ink-soft);
+  }
+
+  main {
+    padding-block: clamp(2rem, 5vw, 3.5rem) 4rem;
+  }
+
+  .site-footer {
+    border-top: 1px solid var(--rule);
+    color: var(--ink-faint);
+    font-size: var(--step--1);
+  }
+  .foot {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem 2rem;
+    padding-block: 1.5rem 2rem;
+  }
+  .foot p {
+    margin: 0;
+  }
+  .foot .powered {
+    margin-top: 0.35rem;
+  }
+  .foot .powered a {
+    color: var(--ink-soft);
+  }
+  .foot-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem 1.2rem;
+  }
+  .foot-links a {
+    color: var(--ink-soft);
+  }
+</style>

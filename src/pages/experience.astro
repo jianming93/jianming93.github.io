@@ -1,0 +1,93 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import ExperienceEntry from '../components/ExperienceEntry.astro';
+import { Content as SkillsAndAchievements } from '../data/skills.md';
+import { getExperience } from '../lib/site';
+
+// Each entry is a Markdown file in src/content/experience/. Render the bodies once.
+async function load(kind: 'work' | 'education') {
+  const entries = await getExperience(kind);
+  return Promise.all(entries.map(async (entry) => ({ entry, Body: (await render(entry)).Content })));
+}
+const work = await load('work');
+const education = await load('education');
+const current = work.filter(({ entry }) => !entry.data.earlier);
+const earlier = work.filter(({ entry }) => entry.data.earlier);
+---
+
+<BaseLayout title="Experience" description="Work experience, education, technical skills and achievements.">
+  <div class="wrap">
+    <PageHeader title="Experience" lede="Work, education, skills and achievements." />
+    <div class="cv">
+      <section>
+        <h2>Work</h2>
+        {current.map(({ entry, Body }) => <ExperienceEntry entry={entry} Body={Body} />)}
+        {
+          earlier.length > 0 && (
+            <details class="earlier">
+              <summary>Earlier roles ({earlier.length})</summary>
+              {earlier.map(({ entry, Body }) => <ExperienceEntry entry={entry} Body={Body} />)}
+            </details>
+          )
+        }
+      </section>
+      <section>
+        <h2>Education</h2>
+        {education.map(({ entry, Body }) => <ExperienceEntry entry={entry} Body={Body} />)}
+      </section>
+      <section class="skills prose">
+        <SkillsAndAchievements />
+      </section>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full page width; the Markdown bodies are not capped at the reading measure either. */
+  .skills {
+    max-width: none;
+  }
+  section + section {
+    margin-top: 2.5rem;
+  }
+  h2,
+  .skills :global(h2) {
+    font-size: var(--step-2);
+    font-weight: 750;
+    padding-bottom: 0.4rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1rem;
+  }
+  .earlier {
+    margin-top: 0.5rem;
+  }
+  .earlier summary {
+    cursor: pointer;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 1.25rem;
+  }
+  .earlier summary:hover {
+    color: var(--ink);
+  }
+  /* Skill lists render as chips. */
+  .skills :global(h3 + ul) {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .skills :global(h3 + ul li) {
+    margin: 0;
+    padding: 0.1rem 0.65rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    background: var(--surface);
+    font-family: var(--font-ui);
+    font-size: var(--step--1);
+    line-height: 1.6;
+  }
+</style>

@@ -1,0 +1,293 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import LayerTag from '../components/LayerTag.astro';
+import profile from '../assets/profile.jpg';
+import { Content as About } from '../data/about.md';
+import { getLayer } from '../data/layers';
+import { formatDate, getPosts, postUrl, url, SITE_DESCRIPTION, STACK } from '../lib/site';
+
+const allPosts = await getPosts();
+const posts = allPosts.slice(0, 6);
+---
+
+<BaseLayout>
+  <section class="hero" aria-labelledby="hero-h">
+    <div class="dots" aria-hidden="true"></div>
+    <div class="dots glow" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 id="hero-h">Hey there! I'm <span class="hl">Jian Ming</span>.</h1>
+      <p class="lede">
+        Passionate about all things Data Science And Machine Learning. {SITE_DESCRIPTION}
+      </p>
+      <p class="cta">
+        <a class="primary" href={url('/posts/')}>Read the blog</a>
+        <a href={url('/projects/')}>Projects</a>
+        <a href={url('/experience/')}>Experience</a>
+      </p>
+      <p class="powered">
+        Powered by:{' '}
+        {STACK.map((t, i) => (<><a href={t.href}>{t.name}</a>{i < STACK.length - 1 && ' | '}</>))}
+      </p>
+    </div>
+  </section>
+  <div class="wrap">
+
+
+    <section class="latest" aria-labelledby="latest-h">
+      <div class="sec-head">
+        <h2 id="latest-h">Latest posts</h2>
+        <a href={url('/posts/')}>All posts</a>
+      </div>
+      {
+        posts.length === 0 ? (
+          <p class="empty">The first post is in the works.</p>
+        ) : (
+          <ul class="cards">
+            {posts.map((post) => (
+              <li>
+                <article class="card-post" style={`--c:${getLayer(post.data.layer).color}`}>
+                  <div class="meta">
+                    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
+                    <LayerTag layer={post.data.layer} />
+                    {post.data.draft && <span class="draft-flag">Draft</span>}
+                  </div>
+                  <h3>
+                    <a href={postUrl(post)}>{post.data.title}</a>
+                  </h3>
+                  <p class="desc">{post.data.description}</p>
+                </article>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+
+    <section class="about" aria-label="About">
+      <Image class="photo" src={profile} alt="Ng Jian Ming" widths={[384, 640]} sizes="(min-width: 701px) 384px, 90vw" />
+      <div class="prose"><About /></div>
+    </section>
+  </div>
+</BaseLayout>
+
+<script>
+  // Hero: the highlighted dots follow the pointer (skipped if the reader prefers reduced motion).
+  const hero = document.querySelector<HTMLElement>('.hero');
+  if (hero && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    hero.addEventListener('pointermove', (e) => {
+      const r = hero.getBoundingClientRect();
+      hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+      hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+    });
+  }
+</script>
+
+<style>
+  /* ---- hero ---- */
+  .hero {
+    --mx: 50%;
+    --my: 50%;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    /* Full width: pull up under the header (cancels <main>'s top padding). */
+    margin-top: calc(-1 * clamp(2rem, 5vw, 3.5rem));
+    border-block: 1px solid var(--rule);
+    background: var(--surface);
+    padding: clamp(3rem, 9vw, 6.5rem) var(--gutter);
+  }
+  .dots {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background-image: radial-gradient(color-mix(in oklch, var(--ink) 22%, transparent) 1.25px, transparent 1.25px);
+    background-size: 16px 16px;
+    /* dots fade out behind the text and are strongest at the edges */
+    mask-image: radial-gradient(ellipse at center, transparent 15%, black 95%);
+  }
+  .dots.glow {
+    background-image: radial-gradient(var(--link) 1.5px, transparent 1.5px);
+    mask-image: radial-gradient(180px circle at var(--mx) var(--my), black, transparent);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .hero:hover .dots.glow {
+    opacity: 1;
+  }
+  .hero-inner {
+    max-width: 46rem;
+    margin-inline: auto;
+    text-align: center;
+  }
+  .hero h1 {
+    font-size: var(--step-4);
+    font-weight: 800;
+    letter-spacing: -0.035em;
+    line-height: 1.1;
+  }
+  .hl {
+    padding: 0 0.15em;
+    border-radius: 0.2em;
+    box-decoration-break: clone;
+    -webkit-box-decoration-break: clone;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--layer-foundations) 40%, transparent),
+      color-mix(in oklch, var(--layer-kernels) 40%, transparent)
+    ) no-repeat;
+    background-size: 100% 100%;
+    animation: sweep 1.6s 0.4s ease-out backwards;
+  }
+  @keyframes sweep {
+    from {
+      background-size: 0% 100%;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hl {
+      animation: none;
+    }
+    .dots.glow {
+      display: none;
+    }
+  }
+  .lede {
+    font-family: var(--font-body);
+    font-size: var(--step-1);
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 1.1rem 0 0;
+  }
+  .cta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+    margin: 1.75rem 0 0;
+  }
+  .cta a {
+    padding: 0.5rem 1.1rem;
+    border: 1px solid var(--rule);
+    border-radius: var(--radius);
+    background: var(--bg);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .cta a:hover {
+    border-color: var(--ink-faint);
+  }
+  .powered {
+    margin: 1.5rem 0 0;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+  .powered a {
+    color: var(--ink-soft);
+  }
+  .cta a.primary {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+
+  /* ---- about ---- */
+  .about {
+    display: grid;
+    grid-template-columns: 24rem minmax(0, 1fr);
+    gap: clamp(1.25rem, 4vw, 2.5rem);
+    align-items: start;
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+    padding-top: clamp(2.5rem, 5vw, 3.5rem);
+    border-top: 1px solid var(--rule);
+  }
+  .photo {
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius);
+    border: 1px solid var(--rule);
+  }
+  .about :global(h2) {
+    margin-top: 0;
+  }
+  @media (max-width: 700px) {
+    .about {
+      grid-template-columns: 1fr;
+    }
+    .photo {
+      max-width: 24rem;
+    }
+  }
+
+  /* ---- sections ---- */
+  .latest {
+    margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  }
+  .sec-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+  .sec-head h2 {
+    font-size: var(--step-2);
+    font-weight: 750;
+  }
+  .sec-head a {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+  }
+  .empty {
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+  }
+  .cards {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+    gap: 1rem;
+  }
+  .card-post {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    padding: 1.1rem 1.25rem 1.2rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--c);
+    border-radius: var(--radius);
+  }
+  .meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.3rem 0.9rem;
+    font-size: var(--step--1);
+    color: var(--ink-faint);
+  }
+  h3 {
+    font-size: var(--step-1);
+    font-weight: 650;
+    line-height: 1.25;
+  }
+  h3 a {
+    color: var(--ink);
+    text-decoration: none;
+  }
+  h3 a:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--ink-faint);
+  }
+  .desc {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+</style>

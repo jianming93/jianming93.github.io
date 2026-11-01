@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import PostList from '../../components/PostList.astro';
+import { LAYERS, type LayerId } from '../../data/layers';
+import { getPostsByLayer, url } from '../../lib/site';
+
+export function getStaticPaths() {
+  return LAYERS.map((layer, i) => ({
+    params: { layer: layer.id },
+    props: { prev: LAYERS[i - 1], next: LAYERS[i + 1] },
+  }));
+}
+
+const id = Astro.params.layer as LayerId;
+const layer = LAYERS.find((l) => l.id === id)!;
+const { prev, next } = Astro.props;
+const posts = await getPostsByLayer(id);
+---
+
+<BaseLayout title={`#${layer.id}`} description={layer.blurb}>
+  <div class="wrap">
+    <PageHeader title={`#${layer.id}`} lede={layer.blurb} color={layer.color} />
+
+    <section class="posts" aria-labelledby="posts-h">
+      <h2 id="posts-h">Posts</h2>
+      <PostList posts={posts} showLayer={false} empty="No posts in this layer yet." />
+    </section>
+
+    <nav class="layer-pager" aria-label="Other layers">
+      {prev ? <a href={url(`/tags/${prev.id}/`)}>Up the stack: #{prev.id}</a> : <span />}
+      {next && <a href={url(`/tags/${next.id}/`)}>Down the stack: #{next.id}</a>}
+    </nav>
+  </div>
+</BaseLayout>
+
+<style>
+  h2 {
+    font-size: var(--step-1);
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+  }
+  .layer-pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 3rem;
+    font-weight: 600;
+  }
+</style>

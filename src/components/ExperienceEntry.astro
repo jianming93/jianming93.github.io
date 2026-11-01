@@ -1,0 +1,51 @@
+---
+import type { ExperienceEntry } from '../lib/site';
+import { formatRange } from '../lib/site';
+
+interface Props {
+  entry: ExperienceEntry;
+  /** The rendered Markdown body (bullets) of the entry. */
+  Body: any;
+}
+const { entry, Body } = Astro.props;
+---
+
+<article class="entry">
+  <header>
+    <h3>{entry.data.org}</h3>
+    <time class="range">{formatRange(entry.data.start, entry.data.end)}</time>
+  </header>
+  <p class="role">{entry.data.role}</p>
+  <div class="prose"><Body /></div>
+</article>
+
+<style>
+  .entry {
+    margin-bottom: 1.75rem;
+  }
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.25rem 1rem;
+  }
+  h3 {
+    font-size: var(--step-1);
+    font-weight: 650;
+  }
+  .range {
+    font-size: var(--step--1);
+    color: var(--ink-soft);
+    white-space: nowrap;
+  }
+  .role {
+    margin: 0.15rem 0 0.4rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+  }
+  .prose {
+    font-size: 1rem;
+    max-width: none;
+  }
+</style>

@@ -1,0 +1,77 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { LAYERS } from '../../data/layers';
+import { getPosts, url } from '../../lib/site';
+
+const posts = await getPosts();
+const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
+---
+
+<BaseLayout title="Tags" description="Browse the blog by tag: foundations, models, training, kernels and serving.">
+  <div class="wrap">
+    <PageHeader title="Tags" lede="Every post carries one tag, one for each layer of the stack, in the order I'm learning them." />
+    <ol class="grid">
+      {
+        LAYERS.map((l) => (
+          <li style={`--c:${l.color}`} class:list={{ empty: count(l.id) === 0 }}>
+            <a href={url(`/tags/${l.id}/`)}>
+              <strong>#{l.id}</strong>
+              <span>{l.blurb}</span>
+              <em>{count(l.id) === 0 ? 'Coming soon' : `${count(l.id)} ${count(l.id) === 1 ? 'post' : 'posts'}`}</em>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</BaseLayout>
+
+<style>
+  .grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 15rem), 1fr));
+    gap: 1rem;
+  }
+  a {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 1rem 1.15rem 1.1rem;
+    background: var(--surface);
+    border: 1px solid var(--rule);
+    border-top: 4px solid var(--c);
+    border-radius: var(--radius);
+    color: inherit;
+    text-decoration: none;
+  }
+  a:hover {
+    border-color: var(--ink-faint);
+    border-top-color: var(--c);
+  }
+  strong {
+    font-size: var(--step-1);
+    font-weight: 650;
+  }
+  span {
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.45;
+  }
+  em {
+    margin-top: auto;
+    padding-top: 0.3rem;
+    font-style: normal;
+    font-size: var(--step--1);
+    font-weight: 600;
+    color: var(--ink-faint);
+  }
+  .empty strong,
+  .empty span {
+    opacity: 0.7;
+  }
+</style>

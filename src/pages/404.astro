@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { url } from '../lib/site';
+---
+
+<BaseLayout title="Page not found">
+  <div class="wrap nf">
+    <h1>Page not found</h1>
+    <p>
+      This address doesn't match any page. The post may have been renamed. Try the <a href={url('/')}>home page</a> or
+      the <a href={url('/posts/')}>posts</a>.
+    </p>
+    <ul class="links">
+      <li><a href={url('/posts/')}>Posts</a></li>
+      <li><a href={url('/projects/')}>Projects</a></li>
+      <li><a href={url('/experience/')}>Experience</a></li>
+    </ul>
+  </div>
+</BaseLayout>
+
+<style>
+  .nf { max-width: 40rem; }
+  h1 { font-size: var(--step-3); font-weight: 800; letter-spacing: -0.03em; }
+  p { font-family: var(--font-body); color: var(--ink-soft); }
+  .links { display: flex; flex-wrap: wrap; gap: 0.5rem 1.5rem; list-style: none; padding: 0; margin: 1.25rem 0 0; }
+</style>
