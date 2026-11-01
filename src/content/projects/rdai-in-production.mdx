@@ -1,0 +1,63 @@
+---
+title: "Red Dragon AI In Production"
+description: "LLM project with Triton Inference Server + vLLM"
+repo: "https://github.com/jianming93/rdai-ai-in-prod"
+cover: "../../assets/projects/rdai-in-production/chatbot_chatbot.png"
+tags: ["LLM", "Triton Inference Server", "vLLM", "Gradio"]
+order: 1
+---
+
+import Figure from '../../components/Figure.astro';
+import chatbot from '../../assets/projects/rdai-in-production/chatbot_chatbot.png';
+import promptViewer from '../../assets/projects/rdai-in-production/chatbot_prompt_viewer.png';
+import createPrompt from '../../assets/projects/rdai-in-production/prompt_creator_create_new_prompt.png';
+import editPrompt from '../../assets/projects/rdai-in-production/prompt_creator_edit_existing_prompt.png';
+
+> Note: For technical details like configuration and running the application, refer to the project page on GitHub for more information.
+
+## Overview
+
+This project intends to demonstrate how to serve an LLM onto Nvidia's Triton Inference Server with [vLLM](https://docs.vllm.ai/en/latest/) backend and interacting with a frontend created using [Gradio](https://www.gradio.app/).
+
+## Features
+
+There are 2 main features for this project which are:
+
+1. Chatbot
+2. Prompt Creator
+
+## Chatbot
+
+The landing page of the application will first show a very simple chat interface that is done using [Gradio](https://www.gradio.app/) itself. An add-on to the chat interface was to allow prompt templates to be swapped easily when chatting with the LLM itself.
+
+This allows user to use different LLM as well as different configuration parameters. More information can be found in the later section about this.
+
+<Figure src={chatbot} alt="chatbot-landing-page" caption="The landing page of the chatbot application itself." />
+
+There is also a prompt viewer to see how the prompt looks like as well as the other argument configuration that is being passed to the server itself.
+
+<Figure src={promptViewer} alt="chatbot-prompt-viewer" caption="Prompt viewer tab contents." />
+
+> Note: There is no chat history done for this project. This is something that can be done to improve the application.
+
+## Prompt Creator
+
+The `Prompt Creator` allows the user to do 2 things which are:
+
+1. Create a new prompt template
+2. Edit an existing prompt template
+
+<Figure src={createPrompt} alt="prompt-creator-create-new-prompt" caption="Create new prompt template tab contents." />
+
+A prompt template involves the the configuration that is sent to the model server as well as the actual template format to be used, which typically involves the `system` as well as the `user` prompt.
+
+After creating the prompt template, a useful feature is to also be able to edit the existing prompt templates to allow user to modify any configuration that they need.
+
+<Figure src={editPrompt} alt="prompt-creator-edit-existing-prompt" caption="Edit existing prompt template tab contents." />
+
+## Improvements
+
+1. There is no 'conversation flow' currently implemented. The LLM only receives the latest message without the history.
+2. There is no validation for the template to ensure all keys specified exist in the template before forming the prompt string to send to the LLM.
+3. Only `vllm` backend is allowed for this version. May be good to explore TensorRT-LLM in future.
+4. Handling of creation and editing of prompts can be cleaner.

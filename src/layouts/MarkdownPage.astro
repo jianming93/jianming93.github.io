@@ -1,0 +1,22 @@
+---
+// Layout for plain Markdown pages in src/pages (e.g. about.md).
+import 'katex/dist/katex.min.css';
+import BaseLayout from './BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+
+const { frontmatter } = Astro.props;
+---
+
+<BaseLayout title={frontmatter.title} description={frontmatter.description}>
+  <div class="wrap">
+    <PageHeader title={frontmatter.title} />
+    <div class="prose body"><slot /></div>
+  </div>
+</BaseLayout>
+
+<style>
+  /* Full width: the Markdown body is not capped at the reading measure. */
+  .body {
+    max-width: none;
+  }
+</style>

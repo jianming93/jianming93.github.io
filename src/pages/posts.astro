@@ -1,0 +1,70 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from '../components/PageHeader.astro';
+import PostList from '../components/PostList.astro';
+import { LAYERS } from '../data/layers';
+import { getPosts, url } from '../lib/site';
+
+const posts = await getPosts();
+const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
+---
+
+<BaseLayout title="Posts" description="Posts from learning the LLM stack: derivations, code, benchmarks and things that finally clicked.">
+  <div class="wrap">
+    <PageHeader title="Posts" lede="Everything I write, newest first: bugs, benchmarks, derivations and things that finally clicked." />
+    <nav class="filters" aria-label="Filter by tag">
+      <span class="on" aria-current="page">All <small>{posts.length}</small></span>
+      {
+        LAYERS.map((l) => (
+          <a href={url(`/tags/${l.id}/`)} style={`--c:${l.color}`}>
+            #{l.id} <small>{count(l.id)}</small>
+          </a>
+        ))
+      }
+    </nav>
+    <div class="list"><PostList posts={posts} empty="The first post is in the works." /></div>
+  </div>
+</BaseLayout>
+
+<style>
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin: -0.75rem 0 1.75rem;
+    font-size: var(--step--1);
+  }
+  .filters a,
+  .filters .on {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+    padding: 0.25rem 0.8rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--ink-soft);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .filters a::before {
+    content: '';
+    width: 0.55em;
+    height: 0.55em;
+    border-radius: 2px;
+    background: var(--c);
+    align-self: center;
+  }
+  .filters a:hover {
+    border-color: var(--ink-faint);
+    color: var(--ink);
+  }
+  .filters .on {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: var(--bg);
+  }
+  .filters small {
+    font-weight: 500;
+    opacity: 0.75;
+  }
+</style>

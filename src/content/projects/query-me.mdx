@@ -1,0 +1,42 @@
+---
+title: "Query Me"
+description: "A simple app leveraging GPT-3 to help non-technical users to query from CSV files with free text."
+repo: "https://github.com/jianming93/query-me"
+cover: "../../assets/projects/query-me/query-me-homepage.png"
+tags: ["GPT-3", "Dash", "Docker"]
+order: 3
+---
+
+import Figure from '../../components/Figure.astro';
+import home from '../../assets/projects/query-me/query-me-homepage.png';
+import upload from '../../assets/projects/query-me/query-me-upload-files.png';
+import input from '../../assets/projects/query-me/query-me-input-query.png';
+import results from '../../assets/projects/query-me/query-me-display-and-download-results.png';
+
+## Overview
+
+A simple app leveraging `GPT-3` to help non-technical users to query from CSV files with free text. This was inspired from a challenge faced by someone I know whom is a non-technical user that needed to perform certain data extraction from one or more possible CSV files but have no knowledge of Microsoft Excel/SQL.
+
+> Note: To understand more about `GPT-3`, please read the [paper](https://arxiv.org/abs/2005.14165) and also visit the [OpenAI](https://openai.com/) website to know more.
+
+The app was developed using Plotly's [Dash](https://dash.plotly.com/) and containerize via [Docker](https://www.docker.com/).
+
+## How It Works?
+
+<Figure src={home} alt="query-me-homepage" caption="The home page of the application." />
+
+Simply upload one or more CSV files by drag and dropping or clicking the upload area. All the uploaded CSVs will be displayed in the table if it is uploaded successfully.
+
+<Figure src={upload} alt="query-me-upload-files" caption="Uploading files to the app." />
+
+Navigate between the different CSVs in other tables by using the `Previous` and `Next` buttons. After which, input the query in the free text area below the table.
+
+<Figure src={input} alt="query-me-input-query" caption="Input query in the free text area." />
+
+Once the query is input, click on the `Submit` button to submit the query along with the CSV files. After some time, the result of the query will be displayed in the table below the free text area.
+
+<Figure src={results} alt="query-me-display-and-download-results" caption="Results generated from the query." />
+
+The output results can also be downloaded by simply clicking on the `Download` button below.
+
+> Note: To get a desirable results, please try variations of the same query e.g. Who has the largest value, The name with the largest value, etc.

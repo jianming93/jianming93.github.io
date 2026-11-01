@@ -1,0 +1,33 @@
+name: Check
+
+# Validates every pull request (types, front matter, and a full build) without deploying.
+# The site itself is published by deploy.yml when changes land on main.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# A newer push to the same PR makes the older run obsolete.
+concurrency:
+  group: check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out
+        uses: actions/checkout@v7
+      - name: Set up Node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Type and front-matter check
+        run: npm run check
+      - name: Build
+        run: npm run build
