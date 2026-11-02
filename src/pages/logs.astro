@@ -1,19 +1,19 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
-import PostList from '../components/PostList.astro';
+import LogList from '../components/LogList.astro';
 import { LAYERS } from '../data/layers';
-import { getPosts, url } from '../lib/site';
+import { getLogs, url } from '../lib/site';
 
-const posts = await getPosts();
-const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
+const logs = await getLogs();
+const count = (id: string) => logs.filter((p) => p.data.layer === id).length;
 ---
 
-<BaseLayout title="Posts" description="Posts from learning the LLM stack: derivations, code, benchmarks and things that finally clicked.">
+<BaseLayout title="Logs" description="Logs from learning the LLM stack: derivations, code, benchmarks and things that finally clicked.">
   <div class="wrap">
-    <PageHeader title="Posts" lede="Everything I write, newest first: bugs, benchmarks, derivations and things that finally clicked." />
+    <PageHeader title="Logs" lede="Everything I write, newest first: bugs, benchmarks, derivations and things that finally clicked." />
     <nav class="filters" aria-label="Filter by tag">
-      <span class="on" aria-current="page">All <small>{posts.length}</small></span>
+      <span class="on" aria-current="page">All <small>{logs.length}</small></span>
       {
         LAYERS.map((l) => (
           <a href={url(`/tags/${l.id}/`)} style={`--c:${l.color}`}>
@@ -22,7 +22,7 @@ const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
         ))
       }
     </nav>
-    <div class="list"><PostList posts={posts} empty="The first post is in the works." /></div>
+    <div class="list"><LogList logs={logs} empty="The first log is in the works." /></div>
   </div>
 </BaseLayout>
 

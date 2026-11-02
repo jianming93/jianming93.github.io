@@ -75,4 +75,4 @@ writeFileSync(FILE, src.replace(marker, entry + marker));
 
 console.log(`Added #${id} to ${FILE} (hue ${hue}).`);
 if (blurb.startsWith('TODO')) console.log(`Edit the blurb in ${FILE}.`);
-console.log(`Use it:  npm run new -- "Post title" --layer ${id}`);
+console.log(`Use it:  npm run new -- "Log title" --layer ${id}`);

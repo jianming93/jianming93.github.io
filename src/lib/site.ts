@@ -30,12 +30,12 @@ export function labsUrl(file: string, startLine?: number, endLine?: number) {
   return `${REPO_URL}/blob/main/labs/${clean}${anchor}`;
 }
 
-/** Resolve a post's `code` field: a path under labs/ or a full URL. */
+/** Resolve a log's `code` field: a path under labs/ or a full URL. */
 export function codeUrl(code: string) {
   return /^https?:\/\//.test(code) ? code : `${REPO_URL}/tree/main/labs/${code.replace(/^\/?labs\//, '').replace(/^\/|\/$/g, '')}`;
 }
 
-export type Post = CollectionEntry<'posts'>;
+export type Log = CollectionEntry<'logs'>;
 export type Project = CollectionEntry<'projects'>;
 export type ExperienceEntry = CollectionEntry<'experience'>;
 
@@ -46,26 +46,26 @@ export function url(path = '/'): string {
   return `${base}${clean}`;
 }
 
-export function postUrl(post: Post) {
-  return url(`/posts/${post.id}/`);
+export function logUrl(log: Log) {
+  return url(`/logs/${log.id}/`);
 }
 
-/** Published posts, newest first. Drafts are included only in `astro dev`. */
-export async function getPosts(filter?: (p: Post) => boolean): Promise<Post[]> {
-  const posts = await getCollection('posts', ({ data }) => import.meta.env.DEV || !data.draft);
-  return posts
+/** Published logs, newest first. Drafts are included only in `astro dev`. */
+export async function getLogs(filter?: (p: Log) => boolean): Promise<Log[]> {
+  const logs = await getCollection('logs', ({ data }) => import.meta.env.DEV || !data.draft);
+  return logs
     .filter((p) => (filter ? filter(p) : true))
     .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 }
 
-export async function getPostsByLayer(layer: LayerId) {
-  return getPosts((p) => p.data.layer === layer);
+export async function getLogsByLayer(layer: LayerId) {
+  return getLogs((p) => p.data.layer === layer);
 }
 
-/** All posts in a series, ordered by part (unnumbered parts last, by date). */
+/** All logs in a series, ordered by part (unnumbered parts last, by date). */
 export async function getSeries(series: string) {
-  const posts = await getPosts((p) => p.data.series === series);
-  return posts.sort((a, b) => {
+  const logs = await getLogs((p) => p.data.series === series);
+  return logs.sort((a, b) => {
     const pa = a.data.part ?? Number.MAX_SAFE_INTEGER;
     const pb = b.data.part ?? Number.MAX_SAFE_INTEGER;
     return pa !== pb ? pa - pb : a.data.pubDate.valueOf() - b.data.pubDate.valueOf();

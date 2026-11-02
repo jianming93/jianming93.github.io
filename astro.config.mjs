@@ -23,10 +23,12 @@ export default defineConfig({
   base: BASE,
   trailingSlash: 'ignore',
 
-  // Old URLs that should keep working: the portfolio's /blogs stub, and /layers
+  // Old URLs that should keep working: the portfolio's /blogs stub, /posts (logs used to be called posts), and /layers
   // (tags used to be called layers).
   redirects: {
-    '/blogs': '/posts',
+    '/blogs': '/logs',
+    '/posts': '/logs',
+    '/posts/[...slug]': '/logs/[...slug]',
     '/layers': '/tags',
     '/layers/[layer]': '/tags/[layer]',
   },

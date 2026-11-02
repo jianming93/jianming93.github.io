@@ -4,43 +4,43 @@ import { render } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import LayerTag from '../../components/LayerTag.astro';
 import { getLayer } from '../../data/layers';
-import { codeUrl, formatDate, getPosts, getSeries, postUrl, readingMinutes, url, AUTHOR, GITHUB_URL, LINKEDIN_URL, REPO_URL, type Post } from '../../lib/site';
+import { codeUrl, formatDate, getLogs, getSeries, logUrl, readingMinutes, url, AUTHOR, GITHUB_URL, LINKEDIN_URL, REPO_URL, type Log } from '../../lib/site';
 
 export async function getStaticPaths() {
-  const posts = await getPosts();
-  // posts are newest first; "older" is the next item in the list.
-  return posts.map((post, i) => ({
-    params: { slug: post.id },
-    props: { post, newer: posts[i - 1], older: posts[i + 1] },
+  const logs = await getLogs();
+  // logs are newest first; "older" is the next item in the list.
+  return logs.map((log, i) => ({
+    params: { slug: log.id },
+    props: { log, newer: logs[i - 1], older: logs[i + 1] },
   }));
 }
 
 interface Props {
-  post: Post;
-  newer?: Post;
-  older?: Post;
+  log: Log;
+  newer?: Log;
+  older?: Log;
 }
 
-const { post, newer, older } = Astro.props;
-const { Content, headings } = await render(post);
-const { title, description, pubDate, updatedDate, layer, code, series, part, draft } = post.data;
+const { log, newer, older } = Astro.props;
+const { Content, headings } = await render(log);
+const { title, description, pubDate, updatedDate, layer, code, series, part, draft } = log.data;
 const layerInfo = getLayer(layer);
 
 const toc = headings.filter((h) => h.depth === 2 || h.depth === 3);
 const showToc = toc.filter((h) => h.depth === 2).length >= 3;
 
 // "Suggest an edit" link straight to this file on GitHub.
-const editUrl = post.filePath ? `${REPO_URL}/edit/main/${post.filePath}` : undefined;
+const editUrl = log.filePath ? `${REPO_URL}/edit/main/${log.filePath}` : undefined;
 
-// Other parts of the same series, if this post belongs to one.
-const seriesPosts = series ? await getSeries(series) : [];
-const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
+// Other parts of the same series, if this log belongs to one.
+const seriesLogs = series ? await getSeries(series) : [];
+const seriesIndex = seriesLogs.findIndex((p) => p.id === log.id);
 ---
 
 <BaseLayout title={title} description={description} type="article">
   <div class="wrap">
-    <article class:list={['post', { 'has-toc': showToc }]} style={`--c:${layerInfo.color}`}>
-      <header class="post-head">
+    <article class:list={['log', { 'has-toc': showToc }]} style={`--c:${layerInfo.color}`}>
+      <header class="log-head">
         <div class="kicker">
           <LayerTag layer={layer} />
           {draft && <span class="draft-flag">Draft, not published</span>}
@@ -51,8 +51,8 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
           <span>By <a href={url('/')}>{AUTHOR}</a></span>
           <time datetime={pubDate.toISOString()}>{formatDate(pubDate)}</time>
           {updatedDate && <span>Updated {formatDate(updatedDate)}</span>}
-          <span>{readingMinutes(post.body)} min read</span>
-          {code && <a href={codeUrl(code)}>Code for this post</a>}
+          <span>{readingMinutes(log.body)} min read</span>
+          {code && <a href={codeUrl(code)}>Code for this log</a>}
         </div>
       </header>
 
@@ -75,16 +75,16 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
 
       <div class="prose body">
         {
-          seriesPosts.length > 1 && (
+          seriesLogs.length > 1 && (
             <nav class="series" aria-label="Series">
               <p class="series-title">
                 {series}
-                {part && <span>Part {part} of {seriesPosts.length}</span>}
+                {part && <span>Part {part} of {seriesLogs.length}</span>}
               </p>
               <ol>
-                {seriesPosts.map((p, i) => (
+                {seriesLogs.map((p, i) => (
                   <li aria-current={i === seriesIndex ? 'page' : undefined}>
-                    {i === seriesIndex ? p.data.title : <a href={postUrl(p)}>{p.data.title}</a>}
+                    {i === seriesIndex ? p.data.title : <a href={logUrl(p)}>{p.data.title}</a>}
                   </li>
                 ))}
               </ol>
@@ -94,7 +94,7 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
         <Content />
       </div>
 
-      <footer class="post-foot">
+      <footer class="log-foot">
         <aside class="author" aria-label="About the author">
           <p class="author-name"><a href={url('/')}>{AUTHOR}</a></p>
           <p>AI engineer, learning the LLM stack in public, from algorithms down to GPU kernels and serving.</p>
@@ -109,10 +109,10 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
           Spotted a mistake? I'm learning as I go, so corrections are very welcome.
           {editUrl && <a href={editUrl}>Suggest an edit on GitHub</a>}
         </p>
-        <nav class="pager" aria-label="More posts">
+        <nav class="pager" aria-label="More logs">
           {
             older ? (
-              <a class="older" href={postUrl(older)}>
+              <a class="older" href={logUrl(older)}>
                 <span>Older</span>
                 {older.data.title}
               </a>
@@ -122,7 +122,7 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
           }
           {
             newer && (
-              <a class="newer" href={postUrl(newer)}>
+              <a class="newer" href={logUrl(newer)}>
                 <span>Newer</span>
                 {newer.data.title}
               </a>
@@ -135,35 +135,35 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
 </BaseLayout>
 
 <script>
-  // On narrow screens the contents list sits above the post, so start it collapsed.
+  // On narrow screens the contents list sits above the log, so start it collapsed.
   if (matchMedia('(max-width: 1000px)').matches) {
     document.querySelector('.toc details')?.removeAttribute('open');
   }
 </script>
 
 <style>
-  .post {
+  .log {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     column-gap: 3.5rem;
     border-left: 4px solid var(--c);
     padding-left: clamp(1rem, 3vw, 2.25rem);
   }
-  .post.has-toc {
+  .log.has-toc {
     grid-template-columns: minmax(0, 1fr) minmax(12rem, 15rem);
     grid-template-areas:
       'head head'
       'body toc'
       'foot .';
   }
-  .has-toc .post-head { grid-area: head; }
+  .has-toc .log-head { grid-area: head; }
   /* Full width: the Markdown body is not capped at the reading measure. */
   .body { max-width: none; }
   .has-toc .body { grid-area: body; }
   .has-toc .toc { grid-area: toc; }
-  .has-toc .post-foot { grid-area: foot; }
+  .has-toc .log-foot { grid-area: foot; }
 
-  .post-head {
+  .log-head {
     margin-bottom: 2.5rem;
   }
   .kicker {
@@ -257,7 +257,7 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
     font-weight: 600;
   }
 
-  .post-foot {
+  .log-foot {
     margin-top: 3.5rem;
     padding-top: 1.5rem;
     border-top: 1px solid var(--rule);
@@ -323,7 +323,7 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
   }
 
   @media (max-width: 1000px) {
-    .post.has-toc {
+    .log.has-toc {
       grid-template-columns: minmax(0, 1fr);
       grid-template-areas: 'head' 'toc' 'body' 'foot';
     }
@@ -338,7 +338,7 @@ const seriesIndex = seriesPosts.findIndex((p) => p.id === post.id);
     }
   }
   @media (max-width: 640px) {
-    .post {
+    .log {
       border-left-width: 3px;
       padding-left: 0.9rem;
     }

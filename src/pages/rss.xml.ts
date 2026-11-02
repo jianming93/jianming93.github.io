@@ -1,19 +1,19 @@
 import rss from '@astrojs/rss';
 import type { APIContext } from 'astro';
-import { getPosts, postUrl, SITE_DESCRIPTION, AUTHOR } from '../lib/site';
+import { getLogs, logUrl, SITE_DESCRIPTION, AUTHOR } from '../lib/site';
 
 export async function GET(context: APIContext) {
-  const posts = await getPosts();
+  const logs = await getLogs();
   return rss({
     title: `${AUTHOR}: Rolling in Deep Learning`,
     description: SITE_DESCRIPTION,
     site: context.site!,
-    items: posts.map((post) => ({
-      title: post.data.title,
-      description: post.data.description,
-      pubDate: post.data.pubDate,
-      link: postUrl(post),
-      categories: [post.data.layer],
+    items: logs.map((log) => ({
+      title: log.data.title,
+      description: log.data.description,
+      pubDate: log.data.pubDate,
+      link: logUrl(log),
+      categories: [log.data.layer],
     })),
   });
 }

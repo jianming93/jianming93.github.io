@@ -1,34 +1,34 @@
 ---
 import LayerTag from './LayerTag.astro';
-import { formatDate, postUrl, readingMinutes, type Post } from '../lib/site';
+import { formatDate, logUrl, readingMinutes, type Log } from '../lib/site';
 
 interface Props {
-  posts: Post[];
-  /** 'full' shows the description; 'compact' is one line per post. */
+  logs: Log[];
+  /** 'full' shows the description; 'compact' is one line per log. */
   variant?: 'full' | 'compact';
   showLayer?: boolean;
   empty?: string;
 }
-const { posts, variant = 'full', showLayer = true, empty = 'Nothing here yet.' } = Astro.props;
+const { logs, variant = 'full', showLayer = true, empty = 'Nothing here yet.' } = Astro.props;
 ---
 
 {
-  posts.length === 0 ? (
+  logs.length === 0 ? (
     <p class="empty">{empty}</p>
   ) : (
-    <ol class:list={['posts', variant]}>
-      {posts.map((post) => (
+    <ol class:list={['logs', variant]}>
+      {logs.map((log) => (
         <li>
           <article>
             <h3>
-              <a href={postUrl(post)}>{post.data.title}</a>
-              {post.data.draft && <span class="draft-flag">Draft</span>}
+              <a href={logUrl(log)}>{log.data.title}</a>
+              {log.data.draft && <span class="draft-flag">Draft</span>}
             </h3>
-            {variant === 'full' && <p class="desc">{post.data.description}</p>}
+            {variant === 'full' && <p class="desc">{log.data.description}</p>}
             <div class="meta">
-              <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-              {showLayer && <LayerTag layer={post.data.layer} />}
-              {variant === 'full' && <span>{readingMinutes(post.body)} min read</span>}
+              <time datetime={log.data.pubDate.toISOString()}>{formatDate(log.data.pubDate)}</time>
+              {showLayer && <LayerTag layer={log.data.layer} />}
+              {variant === 'full' && <span>{readingMinutes(log.body)} min read</span>}
             </div>
           </article>
         </li>
@@ -38,15 +38,15 @@ const { posts, variant = 'full', showLayer = true, empty = 'Nothing here yet.' }
 }
 
 <style>
-  .posts {
+  .logs {
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .posts > li {
+  .logs > li {
     border-top: 1px solid var(--rule);
   }
-  .posts > li:last-child {
+  .logs > li:last-child {
     border-bottom: 1px solid var(--rule);
   }
   article {
