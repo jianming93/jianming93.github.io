@@ -2,15 +2,15 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
 import { LAYERS } from '../../data/layers';
-import { getPosts, url } from '../../lib/site';
+import { getLogs, url } from '../../lib/site';
 
-const posts = await getPosts();
-const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
+const logs = await getLogs();
+const count = (id: string) => logs.filter((p) => p.data.layer === id).length;
 ---
 
-<BaseLayout title="Tags" description="Browse the blog by tag: foundations, models, training, kernels and serving.">
+<BaseLayout title="Tags" description="Browse the logs by tag: foundations, models, training, kernels and serving.">
   <div class="wrap">
-    <PageHeader title="Tags" lede="Every post carries one tag, one for each layer of the stack, in the order I'm learning them." />
+    <PageHeader title="Tags" lede="Every log carries one tag, one for each layer of the stack, in the order I'm learning them." />
     <ol class="grid">
       {
         LAYERS.map((l) => (
@@ -18,7 +18,7 @@ const count = (id: string) => posts.filter((p) => p.data.layer === id).length;
             <a href={url(`/tags/${l.id}/`)}>
               <strong>#{l.id}</strong>
               <span>{l.blurb}</span>
-              <em>{count(l.id) === 0 ? 'Coming soon' : `${count(l.id)} ${count(l.id) === 1 ? 'post' : 'posts'}`}</em>
+              <em>{count(l.id) === 0 ? 'Coming soon' : `${count(l.id)} ${count(l.id) === 1 ? 'log' : 'logs'}`}</em>
             </a>
           </li>
         ))

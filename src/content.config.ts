@@ -3,22 +3,22 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 import { LAYER_IDS } from './data/layers';
 
-// Every post is a Markdown (.md) or MDX (.mdx) file in src/content/posts/.
-// The file name (without extension) becomes the URL: /posts/<file-name>/
-const posts = defineCollection({
-  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/posts' }),
+// Every log is a Markdown (.md) or MDX (.mdx) file in src/content/logs/.
+// The file name (without extension) becomes the URL: /logs/<file-name>/
+const logs = defineCollection({
+  loader: glob({ pattern: '**/*.{md,mdx}', base: './src/content/logs' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
     pubDate: z.coerce.date(),
     updatedDate: z.coerce.date().optional(),
-    // The post's tag: which layer of the stack it belongs to (see src/data/layers.ts).
+    // The log's tag: which layer of the stack it belongs to (see src/data/layers.ts).
     layer: z.enum(LAYER_IDS),
-    // Code that goes with the post: a folder under labs/ ('kernels/online-softmax')
+    // Code that goes with the log: a folder under labs/ ('kernels/online-softmax')
     // or a full URL to an external repository.
     code: z.string().optional(),
-    // Multi-part posts: give each part the same `series` name and a `part` number.
-    // The post page then links the parts together.
+    // Multi-part logs: give each part the same `series` name and a `part` number.
+    // The log page then links the parts together.
     series: z.string().optional(),
     part: z.number().int().positive().optional(),
     // Drafts show up in `npm run dev` but are never published.
@@ -61,4 +61,4 @@ const experience = defineCollection({
   }),
 });
 
-export const collections = { posts, projects, experience };
+export const collections = { logs, projects, experience };

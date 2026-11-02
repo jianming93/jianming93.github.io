@@ -1,5 +1,5 @@
-// The blog's tags. Each one is a layer of the stack, listed in the order of the journey.
-// Every post carries exactly one (the `layer:` field in its front matter) and shows it
+// The logs' tags. Each one is a layer of the stack, listed in the order of the journey.
+// Every log carries exactly one (the `layer:` field in its front matter) and shows it
 // as a hashtag: #foundations, #models, ...
 //
 // To add a tag, run:   npm run new-tag -- <id> --name "Display name" --blurb "One line about it"
@@ -41,6 +41,12 @@ const TAGS = [
     name: 'Serving',
     blurb: 'KV caches, batching, paged attention, quantisation and inference engines.',
     hue: 295,
+  },
+  {
+    id: 'misc',
+    name: 'Misc',
+    blurb: 'Anything that doesn\'t fit a layer of the stack: tools, side notes and things picked up along the way.',
+    hue: 130,
   },
 ] as const;
 

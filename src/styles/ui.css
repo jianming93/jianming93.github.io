@@ -8,7 +8,7 @@
      own token names onto the same variables, so everything stays in sync.
    - Dark mode is keyed on <html data-theme="dark">, not Basecoat's .dark class.
 
-   Usage in pages and MDX posts: plain HTML with Basecoat classes, e.g.
+   Usage in pages and MDX logs: plain HTML with Basecoat classes, e.g.
      <button class="btn" data-variant="outline">Run benchmark</button>
      <div class="card"><header><h3>…</h3></header><section>…</section></div>
    Interactive components (tabs, dropdown, select, …) also need their script;
@@ -171,7 +171,7 @@
 
 /* --- Site tweaks ---------------------------------------------------------- */
 @layer components {
-  /* Inside posts, give components the same vertical rhythm as paragraphs. */
+  /* Inside logs, give components the same vertical rhythm as paragraphs. */
   .prose :is(.card, .alert, .tabs, .table-container, .accordion) {
     margin-block: 1.5em;
   }

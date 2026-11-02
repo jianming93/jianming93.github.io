@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "new": "node scripts/new-post.mjs",
+    "new": "node scripts/new-log.mjs",
     "new-tag": "node scripts/new-tag.mjs",
     "astro": "astro"
   },

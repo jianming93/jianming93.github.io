@@ -1,15 +1,15 @@
 #!/usr/bin/env node
-// Create a new post with front matter filled in.
+// Create a new log with front matter filled in.
 //
-//   npm run new -- "Paged attention in 200 lines"                 # post in 'models'
+//   npm run new -- "Paged attention in 200 lines"                 # log in 'models'
 //   npm run new -- "Paged attention in 200 lines" --layer serving
 //   npm run new -- "Notes on RoPE" --layer models --mdx
 //   npm run new -- "CUDA from zero: tiled matmul" --layer kernels --series "CUDA from zero" --part 3 --code kernels/matmul
 //
 // Flags:
-//   --layer <id>     the post's tag: any id in src/data/layers.ts (add one with `npm run new-tag`)
+//   --layer <id>     the log's tag: any id in src/data/layers.ts (add one with `npm run new-tag`)
 //   --mdx            create .mdx (to use components and <Snippet>) instead of .md
-//   --code <path>    folder under labs/ with the code for this post (creates it if missing; implies --mdx)
+//   --code <path>    folder under labs/ with the code for this log (creates it if missing; implies --mdx)
 //   --series <name>  name of a multi-part series
 //   --part <n>       part number within the series
 //   --publish        start with draft: false
@@ -30,7 +30,7 @@ const option = (name) => {
 const title = args.find((a, i) => !a.startsWith('--') && !VALUE_FLAGS.includes(args[i - 1]));
 if (!title) {
   console.error(
-    'Usage: npm run new -- "Post title" [--layer <id>] [--mdx] [--code <labs path>] [--series <name>] [--part <n>] [--publish]',
+    'Usage: npm run new -- "Log title" [--layer <id>] [--mdx] [--code <labs path>] [--series <name>] [--part <n>] [--publish]',
   );
   process.exit(1);
 }
@@ -54,7 +54,7 @@ const slug = title
   .replace(/[^a-z0-9]+/g, '-')
   .replace(/(^-|-$)/g, '');
 const ext = flag('--mdx') || code ? 'mdx' : 'md';
-const dir = join('src', 'content', 'posts');
+const dir = join('src', 'content', 'logs');
 const file = join(dir, `${slug}.${ext}`);
 
 if (existsSync(file)) {
@@ -100,7 +100,7 @@ if (code) {
   const labDir = join('labs', code);
   if (!existsSync(labDir)) {
     mkdirSync(labDir, { recursive: true });
-    writeFileSync(join(labDir, 'README.md'), `# ${code.split('/').pop()}\n\nCode for the post *${title}*.\n`);
+    writeFileSync(join(labDir, 'README.md'), `# ${code.split('/').pop()}\n\nCode for the log *${title}*.\n`);
     console.log(`Created ${labDir}/`);
   }
 }

@@ -1,6 +1,6 @@
 # labs
 
-Code that goes with the posts, one folder per layer of the stack:
+Code that goes with the logs, one folder per layer of the stack:
 
 ```
 labs/
@@ -15,10 +15,10 @@ Each lab is a self-contained project: its own README, dependencies and build
 steps. The site build only reads these files as text, so any language or
 toolchain is fine here.
 
-## Embedding code in a post
+## Embedding code in a log
 
-Posts pull code straight from these files, so a snippet can never drift from
-the source. In an `.mdx` post:
+Logs pull code straight from these files, so a snippet can never drift from
+the source. In an `.mdx` log:
 
 ```mdx
 import Snippet from '../../components/Snippet.astro';

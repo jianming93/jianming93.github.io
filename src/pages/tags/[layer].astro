@@ -1,9 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PageHeader from '../../components/PageHeader.astro';
-import PostList from '../../components/PostList.astro';
+import LogList from '../../components/LogList.astro';
 import { LAYERS, type LayerId } from '../../data/layers';
-import { getPostsByLayer, url } from '../../lib/site';
+import { getLogsByLayer, url } from '../../lib/site';
 
 export function getStaticPaths() {
   return LAYERS.map((layer, i) => ({
@@ -15,16 +15,16 @@ export function getStaticPaths() {
 const id = Astro.params.layer as LayerId;
 const layer = LAYERS.find((l) => l.id === id)!;
 const { prev, next } = Astro.props;
-const posts = await getPostsByLayer(id);
+const logs = await getLogsByLayer(id);
 ---
 
 <BaseLayout title={`#${layer.id}`} description={layer.blurb}>
   <div class="wrap">
     <PageHeader title={`#${layer.id}`} lede={layer.blurb} color={layer.color} />
 
-    <section class="posts" aria-labelledby="posts-h">
-      <h2 id="posts-h">Posts</h2>
-      <PostList posts={posts} showLayer={false} empty="No posts in this layer yet." />
+    <section class="logs" aria-labelledby="logs-h">
+      <h2 id="logs-h">Logs</h2>
+      <LogList logs={logs} showLayer={false} empty="No logs in this layer yet." />
     </section>
 
     <nav class="layer-pager" aria-label="Other layers">

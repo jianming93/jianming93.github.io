@@ -162,7 +162,7 @@ a.layer-tag:hover {
 }
 
 /* ---------------------------------------------------------------------------
-   Prose (post bodies and Markdown pages)
+   Prose (log bodies and Markdown pages)
    --------------------------------------------------------------------------- */
 .prose {
   font-family: var(--font-body);

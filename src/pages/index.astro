@@ -5,10 +5,10 @@ import LayerTag from '../components/LayerTag.astro';
 import profile from '../assets/profile.jpg';
 import { Content as About } from '../data/about.md';
 import { getLayer } from '../data/layers';
-import { formatDate, getPosts, postUrl, url, SITE_DESCRIPTION, STACK } from '../lib/site';
+import { formatDate, getLogs, logUrl, url, STACK } from '../lib/site';
 
-const allPosts = await getPosts();
-const posts = allPosts.slice(0, 6);
+const allLogs = await getLogs();
+const logs = allLogs.slice(0, 6);
 ---
 
 <BaseLayout>
@@ -18,10 +18,10 @@ const posts = allPosts.slice(0, 6);
     <div class="hero-inner">
       <h1 id="hero-h">Hey there! I'm <span class="hl">Jian Ming</span>.</h1>
       <p class="lede">
-        Passionate about all things Data Science And Machine Learning. {SITE_DESCRIPTION}
+        Passionate about all things data science and machine learning, from algorithms to serving.
       </p>
       <p class="cta">
-        <a class="primary" href={url('/posts/')}>Read the blog</a>
+        <a class="primary" href={url('/logs/')}>Read the logs</a>
         <a href={url('/projects/')}>Projects</a>
         <a href={url('/experience/')}>Experience</a>
       </p>
@@ -36,26 +36,26 @@ const posts = allPosts.slice(0, 6);
 
     <section class="latest" aria-labelledby="latest-h">
       <div class="sec-head">
-        <h2 id="latest-h">Latest posts</h2>
-        <a href={url('/posts/')}>All posts</a>
+        <h2 id="latest-h">Latest logs</h2>
+        <a href={url('/logs/')}>All logs</a>
       </div>
       {
-        posts.length === 0 ? (
-          <p class="empty">The first post is in the works.</p>
+        logs.length === 0 ? (
+          <p class="empty">The first log is in the works.</p>
         ) : (
           <ul class="cards">
-            {posts.map((post) => (
+            {logs.map((log) => (
               <li>
-                <article class="card-post" style={`--c:${getLayer(post.data.layer).color}`}>
+                <article class="card-log" style={`--c:${getLayer(log.data.layer).color}`}>
                   <div class="meta">
-                    <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
-                    <LayerTag layer={post.data.layer} />
-                    {post.data.draft && <span class="draft-flag">Draft</span>}
+                    <time datetime={log.data.pubDate.toISOString()}>{formatDate(log.data.pubDate)}</time>
+                    <LayerTag layer={log.data.layer} />
+                    {log.data.draft && <span class="draft-flag">Draft</span>}
                   </div>
                   <h3>
-                    <a href={postUrl(post)}>{post.data.title}</a>
+                    <a href={logUrl(log)}>{log.data.title}</a>
                   </h3>
-                  <p class="desc">{post.data.description}</p>
+                  <p class="desc">{log.data.description}</p>
                 </article>
               </li>
             ))}
@@ -251,7 +251,7 @@ const posts = allPosts.slice(0, 6);
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
     gap: 1rem;
   }
-  .card-post {
+  .card-log {
     height: 100%;
     display: flex;
     flex-direction: column;

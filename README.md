@@ -1,6 +1,6 @@
 # jianming93.github.io
 
-Personal site of Ng Jian Ming: a blog following the LLM stack from algorithms down to GPU kernels and serving, plus projects and experience. Built with [Astro](https://astro.build), published to GitHub Pages at <https://jianming93.github.io>.
+Personal site of Ng Jian Ming: a learning log following the LLM stack from algorithms down to GPU kernels and serving, plus projects and experience. Built with [Astro](https://astro.build), published to GitHub Pages at <https://jianming93.github.io>.
 
 **Everything you write is Markdown.** No TSX or data files to edit for content.
 
@@ -19,29 +19,29 @@ npm run check    # type + front-matter validation
 
 | What | Where | URL |
 |---|---|---|
-| Blog posts | `src/content/posts/*.md` or `.mdx` | `/posts/<file-name>/` |
+| Learning logs | `src/content/logs/*.md` or `.mdx` | `/logs/<file-name>/` |
 | Projects | `src/content/projects/*.mdx` | `/projects/<file-name>/` |
 | Work and education | `src/content/experience/*.md` (bullets are the body) | `/experience/` |
 | Skills and achievements | `src/data/skills.md` | `/experience/` |
 | Home page short bio | `src/data/about.md` (hero and layout: `src/pages/index.astro`) | `/` |
 | Full "About" story | `src/pages/about.md` | `/about/` |
-| RSS feed | generated from posts by `src/pages/rss.xml.ts` | `/rss.xml` |
+| RSS feed | generated from logs by `src/pages/rss.xml.ts` | `/rss.xml` |
 | Social preview image | `public/og-default.png` (1200x630) | n/a |
-| Runnable code that posts embed | `labs/<layer>/<project>/` | n/a |
+| Runnable code that logs embed | `labs/<layer>/<project>/` | n/a |
 
-### Writing a post
+### Writing a log
 
 ```bash
 npm run new -- "Online softmax" --layer kernels --mdx --code kernels/online-softmax
 ```
 
-This creates `src/content/posts/online-softmax.mdx` as a draft (add `--publish` to skip that). Front matter:
+This creates `src/content/logs/online-softmax.mdx` as a draft (add `--publish` to skip that). Front matter:
 
 ```yaml
 title: "Online softmax"
 description: "One sentence for cards and search results."
 pubDate: 2026-11-01
-layer: kernels            # foundations | models | training | kernels | serving (this is the post's only category)
+layer: kernels            # foundations | models | training | kernels | serving (this is the log's only category)
 series: "Fast attention"  # optional, with `part: 1`
 code: kernels/online-softmax   # optional: folder under labs/ or a full URL
 draft: false
@@ -65,7 +65,7 @@ Copy an existing file in `src/content/projects/` or `src/content/experience/` an
 
 ### Tags
 
-Every post has exactly one tag, shown as a hashtag (`#foundations`, `#models`, `#training`, `#kernels`, `#serving`) and set by its `layer:` front-matter field. The tags are the layers of the stack, defined in one place: `src/data/layers.ts`.
+Every log has exactly one tag, shown as a hashtag (`#foundations`, `#models`, `#training`, `#kernels`, `#serving`) and set by its `layer:` front-matter field. The tags are the layers of the stack, defined in one place: `src/data/layers.ts`.
 
 To add a tag:
 
@@ -73,7 +73,7 @@ To add a tag:
 npm run new-tag -- evals --name "Evals" --blurb "Benchmarks, judges and measuring what matters."
 ```
 
-That adds one entry (id, name, blurb, colour hue) to `src/data/layers.ts`. Nothing else needs editing: the Tags page, the `/tags/<id>/` page, the filter chips on `/posts`, the colours, the allowed `layer:` values and `npm run new -- "Title" --layer evals` all follow from it. Leave `--hue` out and a colour is picked that is far from the existing ones. Edit the file by hand to rename a tag, change its blurb or colour, or reorder them.
+That adds one entry (id, name, blurb, colour hue) to `src/data/layers.ts`. Nothing else needs editing: the Tags page, the `/tags/<id>/` page, the filter chips on `/logs`, the colours, the allowed `layer:` values and `npm run new -- "Title" --layer evals` all follow from it. Leave `--hue` out and a colour is picked that is far from the existing ones. Edit the file by hand to rename a tag, change its blurb or colour, or reorder them.
 
 ## Deploying
 

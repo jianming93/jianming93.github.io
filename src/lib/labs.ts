@@ -1,4 +1,4 @@
-// Read source files from /labs at build time so posts can embed real code.
+// Read source files from /labs at build time so logs can embed real code.
 // Used by src/components/Snippet.astro.
 
 const files = import.meta.glob<string>(
