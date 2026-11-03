@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PageHeader from '../components/PageHeader.astro';
 import ExperienceEntry from '../components/ExperienceEntry.astro';
+import { Content as PatentsAndPublications } from '../data/publications.md';
 import { Content as SkillsAndAchievements } from '../data/skills.md';
 import { getExperience } from '../lib/site';
 
@@ -37,6 +38,9 @@ const earlier = work.filter(({ entry }) => entry.data.earlier);
         <h2>Education</h2>
         {education.map(({ entry, Body }) => <ExperienceEntry entry={entry} Body={Body} />)}
       </section>
+      <section class="publications prose">
+        <PatentsAndPublications />
+      </section>
       <section class="skills prose">
         <SkillsAndAchievements />
       </section>
@@ -46,14 +50,20 @@ const earlier = work.filter(({ entry }) => entry.data.earlier);
 
 <style>
   /* Full page width; the Markdown bodies are not capped at the reading measure either. */
-  .skills {
+  .skills,
+  .publications {
     max-width: none;
   }
   section + section {
     margin-top: 2.5rem;
   }
+  /* Patents and Publications are two h2s in one Markdown file, so space the second one. */
+  .publications :global(h2 + ul + h2) {
+    margin-top: 2.5rem;
+  }
   h2,
-  .skills :global(h2) {
+  .skills :global(h2),
+  .publications :global(h2) {
     font-size: var(--step-2);
     font-weight: 750;
     padding-bottom: 0.4rem;
